@@ -150,7 +150,7 @@ export const Portfolio = () => {
             <button
               key={filter.id}
               onClick={() => setActiveFilter(filter.id)}
-              className={`px-4 py-2 rounded-full flex items-center transition-colors duration-200 ${
+              className={`px-4 py-2 rounded-full bg-gradient-to-r from-indigo-300 to-purple-300 flex items-center transition-colors duration-200 ${
                 activeFilter === filter.id
                   ? "bg-indigo-600 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
