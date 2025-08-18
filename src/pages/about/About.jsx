@@ -88,7 +88,7 @@ export const About = () => {
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
                 Full Stack{" "}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
                   Web Developer
                 </span>
               </h2>
@@ -144,7 +144,7 @@ export const About = () => {
 
             <button
               onClick={handleOpen}
-              className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 shadow-md hover:shadow-lg flex items-center"
+              className="px-6 py-3 bg-gradient-to-r from-indigo-300 to-purple-400 text-white rounded-lg hover:from-indigo-200 hover:to-purple-300 transition-all duration-300 shadow-md hover:shadow-lg flex items-center"
             >
               <Article className="mr-2" />
               View Full Resume

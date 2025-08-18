@@ -20,7 +20,7 @@ import axios from "axios";
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("idle"); // 'idle', 'loading', 'success', 'error'
+  const [status, setStatus] = useState(''); // 'idle', 'loading', 'success', 'error'
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
