@@ -112,16 +112,15 @@ export const Footer = () => {
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((link, index) => (
-                <motion.a
+                <motion.div
                   key={index}
-                  href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ y: -3, scale: 1.1 }}
                   className="text-gray-400 hover:text-indigo-400 transition-colors"
                 >
                   {React.cloneElement(link.icon, { fontSize: "large" })}
-                </motion.a>
+                </motion.div>
               ))}
             </div>
           </div>
