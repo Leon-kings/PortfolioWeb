@@ -16,6 +16,7 @@ import {
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
@@ -24,32 +25,52 @@ export const Footer = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Basic email validation
+    if (!email || !email.includes("@")) {
+      setStatus("error");
+      setMessage("Please enter a valid email address");
+      setTimeout(() => setStatus("idle"), 3000);
+      return;
+    }
+
     setStatus("loading");
 
     try {
-      // Replace with your actual API endpoint
-      const response = await fetch("https://api.example.com/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
 
-      if (response.ok) {
-        setStatus("success");
-        setMessage("Thank you for subscribing!");
-        setEmail("");
-        setTimeout(() => setStatus("idle"), 3000);
-      } else {
-        const data = await response.json();
-        throw new Error(data.message || "Subscription failed");
-      }
+      const response = await axios.post(
+        "https://leonstatusprofile.onrender.com/subscription",
+        { email },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          timeout: 5000, // 5 seconds timeout
+        }
+      );
+
+      setStatus("success");
+      setMessage("Thank you for subscribing! You'll receive updates soon.");
+      setEmail("");
     } catch (error) {
+      let errorMessage = "Subscription failed. Please try again later.";
+
+      if (error.response) {
+        // Server responded with a status other than 2xx
+        errorMessage = error.response.data?.message || errorMessage;
+      } else if (error.request) {
+        // Request was made but no response received
+        errorMessage = "Network error. Please check your connection.";
+      }
+
       setStatus("error");
-      setMessage(error.message);
-      setTimeout(() => setStatus("idle"), 3000);
+      setMessage(errorMessage);
     }
+  };
+
+  const resetForm = () => {
+    setStatus("idle");
+    setMessage("");
   };
 
   const socialLinks = [
@@ -91,15 +112,16 @@ export const Footer = () => {
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((link, index) => (
-                <motion.Link
+                <motion.a
                   key={index}
-                  to={link.url}
+                  href={link.url}
+                  target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ y: -3, scale: 1.1 }}
                   className="text-gray-400 hover:text-indigo-400 transition-colors"
                 >
                   {React.cloneElement(link.icon, { fontSize: "large" })}
-                </motion.Link>
+                </motion.a>
               ))}
             </div>
           </div>
@@ -151,7 +173,7 @@ export const Footer = () => {
                     to={link.url}
                     className="text-gray-400 hover:text-indigo-400 transition-colors flex items-center"
                   >
-                    <button className="w-full bg-gradient-to-r from-indigo-100 to-purple-200">
+                    <button className="w-full bg-gradient-to-r from-indigo-200 to-purple-200">
                       <span className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></span>
                       {link.name}
                     </button>
@@ -187,19 +209,35 @@ export const Footer = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-green-500/20 text-green-400 p-4 rounded-lg flex items-center justify-center space-x-2"
+                className="bg-green-500/20 text-green-400 p-4 rounded-lg flex flex-col items-center justify-center"
               >
-                <CheckCircle />
-                <span>{message}</span>
+                <div className="flex items-center space-x-2 mb-2">
+                  <CheckCircle fontSize="large" />
+                  <span className="text-lg font-medium">{message}</span>
+                </div>
+                <button
+                  onClick={resetForm}
+                  className="mt-2 text-sm bg-gradient-to-r from-indigo-500 to-purple-400 underline"
+                >
+                  Subscribe another email
+                </button>
               </motion.div>
             ) : status === "error" ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-red-500/20 text-red-400 p-4 rounded-lg flex items-center justify-center space-x-2"
+                className="bg-red-500/20 text-red-400 p-4 rounded-lg flex flex-col items-center justify-center"
               >
-                <Error />
-                <span>{message}</span>
+                <div className="flex items-center space-x-2 mb-2">
+                  <Error fontSize="large" />
+                  <span className="text-lg font-medium">{message}</span>
+                </div>
+                <button
+                  onClick={resetForm}
+                  className="mt-2 text-sm bg-gradient-to-r from-indigo-400 to-purple-200 hover:text-red-100 underline"
+                >
+                  Try again
+                </button>
               </motion.div>
             ) : (
               <form
@@ -213,14 +251,15 @@ export const Footer = () => {
                   placeholder="Your email address"
                   className="flex-grow px-4 bg-white/90 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
                   required
+                  disabled={status === "loading"}
                 />
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className={`px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2 ${
+                  className={`px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2 min-w-[150px] ${
                     status === "loading"
-                      ? "bg-indigo-700 cursor-not-allowed"
-                      : "bg-indigo-600 hover:bg-indigo-700"
+                      ? "bg-gradient-to-r from-indigo-300 to-purple-200 cursor-not-allowed"
+                      : "bg-gradient-to-r from-indigo-400 to-blue-400"
                   }`}
                 >
                   {status === "loading" ? (
@@ -261,7 +300,9 @@ export const Footer = () => {
 
         {/* Copyright */}
         <div className="pt-8 border-t border-gray-800 text-center">
-          <p className="text-gray-500">&copy; {new Date().getFullYear()} LD.</p>
+          <p className="text-gray-500">
+            &copy; {new Date().getFullYear()} LD. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

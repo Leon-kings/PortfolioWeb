@@ -188,12 +188,13 @@ export const Services = () => {
                   </button>
                 </div>
 
-                <form onSubmit={handleContactSubmit}>
+                <form onSubmit={handleContactSubmit} className='text-black'>
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
                     <input
                       type="text"
                       name="name"
+                      placeholder='LD'
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       value={formData.name}
                       onChange={handleInputChange}
@@ -206,6 +207,7 @@ export const Services = () => {
                     <input
                       type="email"
                       name="email"
+                      placeholder='admin2example.com'
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       value={formData.email}
                       onChange={handleInputChange}
@@ -247,6 +249,7 @@ export const Services = () => {
                     <textarea
                       name="message"
                       rows="4"
+                      placeholder='Hi LD , Am pleassed to ask you a help!'
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       value={formData.message}
                       onChange={handleInputChange}
