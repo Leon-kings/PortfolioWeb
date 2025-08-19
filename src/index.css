@@ -17,7 +17,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  min-width: 100%;
   width: 100%;
   min-height: 100vh;
 }
@@ -44,6 +44,7 @@ button {
   :root {
     color: #ffffff;
     background-color: #213547;
+    width: 100%;
   }
 
   button {

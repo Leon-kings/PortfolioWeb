@@ -74,7 +74,7 @@ export const About = () => {
                   alt=""
                   className="rounded-xl shadow-xl w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute -bottom-3 -right-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-6 rounded-lg shadow-lg">
+                <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-6 rounded-lg shadow-lg">
                   <div className="text-3xl font-bold">2+</div>
                   <div className="text-sm font-medium">Years Experience</div>
                 </div>
