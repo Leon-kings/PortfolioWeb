@@ -128,7 +128,7 @@ export const Portfolio = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white" id="portfolio">
+    <section className="w-full py-16 md:py-24 bg-white" id="portfolio">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">

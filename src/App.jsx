@@ -1,4 +1,4 @@
-import { AuthProvider } from "./components/navbar/Navbar";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React from "react";
 import "./App.css";
@@ -45,11 +45,11 @@ export default function App() {
           pauseOnHover
           theme="light"
         />
-        <main className="w-full mx-auto py-8 px-4">
+        <main className="app-container w-full mx-auto py-8 px-4">
           {!isLoading && (
-            <AuthProvider>
+           <div className="routes">
               <Navbar />
-              <div className="min-h-screen bg-gray-50">
+              <div className="w-full main-content min-h-screen bg-gray-50">
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/7382/2922" element={<Services />} />
@@ -73,7 +73,7 @@ export default function App() {
               </div>
 
               <Footer />
-            </AuthProvider>
+            </div>
           )}
         </main>
       </div>

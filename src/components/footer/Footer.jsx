@@ -20,7 +20,7 @@ import axios from "axios";
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState(''); // 'idle', 'loading', 'success', 'error'
+  const [status, setStatus] = useState(""); // 'idle', 'loading', 'success', 'error'
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -37,7 +37,6 @@ export const Footer = () => {
     setStatus("loading");
 
     try {
-
       const response = await axios.post(
         "https://leonstatusprofile.onrender.com/subscription",
         { email },
@@ -74,11 +73,11 @@ export const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: <Twitter />, url: "https://twitter.com/yourhandle" },
-    { icon: <GitHub />, url: "https://github.com/yourusername" },
-    { icon: <LinkedIn />, url: "https://linkedin.com/in/yourprofile" },
-    { icon: <Instagram />, url: "https://instagram.com/yourhandle" },
-    { icon: <YouTube />, url: "https://youtube.com/yourchannel" },
+    { icon: <Twitter /> },
+    { icon: <GitHub /> },
+    { icon: <LinkedIn /> },
+    { icon: <Instagram /> },
+    { icon: <YouTube /> },
   ];
 
   const quickLinks = [
@@ -89,9 +88,9 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-900 text-white pt-16 pb-8">
+    <footer className="w-full bg-gray-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* About Section */}
           <div className="lg:col-span-2">
             <motion.div

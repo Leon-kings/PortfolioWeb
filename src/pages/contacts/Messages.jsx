@@ -67,7 +67,7 @@ export const Message = () => {
   };
 
   return (
-    <section className="relative py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-violet-300 to-violet-500">
+    <section className="w-full relative py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-violet-300 to-violet-500">
       {/* SVG Decorations */}
       <div className="absolute top-0 left-0 w-full overflow-hidden">
         <svg
