@@ -184,7 +184,7 @@ export const Hero = () => {
 
   return (
     <section className="hero w-full bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50 py-16 md:py-24">
-      <div className="container mx-auto px-4">
+      <div className=" px-4">
         <div className="flex flex-col md:flex-row items-center">
           {/* Hero Content */}
           <div className="md:w-1/2 mb-12 md:mb-0">

@@ -11,9 +11,9 @@ export default function Home() {
       <div className="w-full text-black">
         <Hero />
         <About />
-        <Services />
+        {/* <Services />
         <Experience />
-        <Portfolio />
+        <Portfolio /> */}
       </div>
     </>
   );
