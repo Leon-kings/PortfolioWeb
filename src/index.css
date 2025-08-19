@@ -18,6 +18,7 @@ body {
   display: flex;
   place-items: center;
   min-width: 100%;
+  margin: 0;
   width: 100%;
   min-height: 100vh;
 }
@@ -29,22 +30,28 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-
   cursor: pointer;
   transition: border-color 0.25s;
 }
 
-@media (max-width: 884px) {
-  .hero .w-full {
-    width: 100%;
-  }
+
+
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
 }
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {
     color: #ffffff;
     background-color: #213547;
     width: 100%;
+    padding: 0;
+    margin: 0;
   }
 
   button {
@@ -54,7 +61,5 @@ button {
     font-weight: 600;
   }
 }
-
-
 
 @import "tailwindcss";

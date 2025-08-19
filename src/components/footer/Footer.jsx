@@ -20,13 +20,12 @@ import axios from "axios";
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState(""); // 'idle', 'loading', 'success', 'error'
+  const [status, setStatus] = useState(""); 
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic email validation
     if (!email || !email.includes("@")) {
       setStatus("error");
       setMessage("Please enter a valid email address");
@@ -37,14 +36,12 @@ export const Footer = () => {
     setStatus("loading");
 
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://leonstatusprofile.onrender.com/subscription",
         { email },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          timeout: 5000, // 5 seconds timeout
+          headers: { "Content-Type": "application/json" },
+          timeout: 5000,
         }
       );
 
@@ -53,15 +50,11 @@ export const Footer = () => {
       setEmail("");
     } catch (error) {
       let errorMessage = "Subscription failed. Please try again later.";
-
       if (error.response) {
-        // Server responded with a status other than 2xx
         errorMessage = error.response.data?.message || errorMessage;
       } else if (error.request) {
-        // Request was made but no response received
         errorMessage = "Network error. Please check your connection.";
       }
-
       setStatus("error");
       setMessage(errorMessage);
     }
@@ -89,17 +82,18 @@ export const Footer = () => {
 
   return (
     <footer className="w-full bg-gray-900 text-white pt-16 pb-8">
-      <div className="container mx-auto px-4">
-        <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <div className="container px-4">
+        {/* Grid for About, Contact, Quick Links */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* About Section */}
           <div className="lg:col-span-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex items-center mb-4"
+              className="grid grid-cols-[auto,1fr] items-center gap-3 mb-4"
             >
-              <Code className="text-indigo-500 text-4xl mr-3" />
+              <Code className="text-indigo-500 text-4xl" />
               <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
                 LD
               </h2>
@@ -109,14 +103,15 @@ export const Footer = () => {
               frameworks. I build fast, responsive, and accessible web <br />
               applications.
             </p>
-            <div className="flex space-x-4">
+            {/* Social icons grid instead of flex */}
+            <div className="grid grid-cols-5 gap-4 max-w-xs">
               {socialLinks.map((link, index) => (
                 <motion.div
                   key={index}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ y: -3, scale: 1.1 }}
-                  className="text-gray-400 hover:text-indigo-400 transition-colors"
+                  className="text-gray-400 hover:text-indigo-400 transition-colors text-center"
                 >
                   {React.cloneElement(link.icon, { fontSize: "large" })}
                 </motion.div>
@@ -133,21 +128,21 @@ export const Footer = () => {
             <h3 className="text-xl font-semibold mb-4 text-white">
               Contact Me
             </h3>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <Email className="text-indigo-400 mr-3 mt-1" />
+            <ul className="grid gap-3">
+              <li className="grid grid-cols-[auto,1fr] items-start gap-3">
+                <Email className="text-indigo-400 mt-1" />
                 <span className="text-gray-400 hover:text-white transition-colors">
                   leonakingeneye2002@gmail.com
                 </span>
               </li>
-              <li className="flex items-start">
-                <Phone className="text-indigo-400 mr-3 mt-1" />
+              <li className="grid grid-cols-[auto,1fr] items-start gap-3">
+                <Phone className="text-indigo-400 mt-1" />
                 <span className="text-gray-400 hover:text-white transition-colors">
                   +250 (78) 794 - 4577
                 </span>
               </li>
-              <li className="flex items-start">
-                <LocationOn className="text-indigo-400 mr-3 mt-1" />
+              <li className="grid grid-cols-[auto,1fr] items-start gap-3">
+                <LocationOn className="text-indigo-400 mt-1" />
                 <span className="text-gray-400 hover:text-white transition-colors">
                   Kigali, Rwanda
                 </span>
@@ -164,17 +159,15 @@ export const Footer = () => {
             <h3 className="text-xl font-semibold mb-4 text-white">
               Quick Links
             </h3>
-            <ul className="space-y-3">
+            <ul className="grid gap-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <Link
                     to={link.url}
-                    className="text-gray-400 hover:text-indigo-400 transition-colors flex items-center"
+                    className="text-gray-400 hover:text-indigo-400 transition-colors grid grid-cols-[auto,1fr] items-center"
                   >
-                    <button className="w-full bg-gradient-to-r from-indigo-200 to-purple-200">
-                      <span className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></span>
-                      {link.name}
-                    </button>
+                    <span className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></span>
+                    {link.name}
                   </Link>
                 </li>
               ))}
@@ -189,7 +182,6 @@ export const Footer = () => {
           transition={{ duration: 0.5 }}
           className="relative bg-gradient-to-r from-indigo-900 to-purple-900 rounded-xl p-8 mb-12 overflow-hidden"
         >
-          {/* Decorative elements */}
           <div className="absolute -top-10 -right-10 w-32 h-32 bg-indigo-800 rounded-full opacity-20"></div>
           <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-800 rounded-full opacity-20"></div>
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent via-transparent to-indigo-600 opacity-10"></div>
@@ -207,9 +199,9 @@ export const Footer = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-green-500/20 text-green-400 p-4 rounded-lg flex flex-col items-center justify-center"
+                className="bg-green-500/20 text-green-400 p-4 rounded-lg grid gap-2 place-items-center"
               >
-                <div className="flex items-center space-x-2 mb-2">
+                <div className="grid grid-cols-[auto,1fr] gap-2 items-center mb-2">
                   <CheckCircle fontSize="large" />
                   <span className="text-lg font-medium">{message}</span>
                 </div>
@@ -224,9 +216,9 @@ export const Footer = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-red-500/20 text-red-400 p-4 rounded-lg flex flex-col items-center justify-center"
+                className="bg-red-500/20 text-red-400 p-4 rounded-lg grid gap-2 place-items-center"
               >
-                <div className="flex items-center space-x-2 mb-2">
+                <div className="grid grid-cols-[auto,1fr] gap-2 items-center mb-2">
                   <Error fontSize="large" />
                   <span className="text-lg font-medium">{message}</span>
                 </div>
@@ -240,21 +232,21 @@ export const Footer = () => {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+                className="grid sm:grid-cols-[1fr,auto] gap-3 max-w-md mx-auto"
               >
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
-                  className="flex-grow px-4 bg-white/90 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
+                  className="px-4 bg-white/90 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
                   required
                   disabled={status === "loading"}
                 />
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className={`px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2 min-w-[150px] ${
+                  className={`px-6 py-3 rounded-lg font-medium transition-colors grid grid-cols-[auto,1fr] items-center justify-center gap-2 min-w-[150px] ${
                     status === "loading"
                       ? "bg-gradient-to-r from-indigo-300 to-purple-200 cursor-not-allowed"
                       : "bg-gradient-to-r from-indigo-400 to-blue-400"
@@ -263,7 +255,7 @@ export const Footer = () => {
                   {status === "loading" ? (
                     <>
                       <svg
-                        className="animate-spin -ml-1 mr-2 h-5 w-5 text-white"
+                        className="animate-spin h-5 w-5 text-white"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"

@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MdMenu, MdClose } from "react-icons/md";
 import { Link } from "react-router-dom";
 import image from "../../assets/images/Black and Red Y2k Modern Professional Fashion Logo.png";
 
 export const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isTabletView, setIsTabletView] = useState(false);
 
   const navItems = [
     { label: "Home", href: "/" },
@@ -16,21 +15,9 @@ export const Navbar = () => {
     { label: "Message us", href: "/7782/8191" }
   ];
 
-  useEffect(() => {
-    const checkScreenSize = () => {
-      // Tablet breakpoint between 768px and 1024px
-      setIsTabletView(window.innerWidth < 1024);
-    };
-
-    // Initial check
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
-
   return (
     <nav className="navbar w-full bg-white shadow-sm sticky top-0 z-50">
-      <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
@@ -39,21 +26,19 @@ export const Navbar = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation (shown on desktop screens) */}
-          {!isTabletView && (
-            <div className="hidden lg:flex items-center space-x-4">
-              {navItems.map((item) => (
-                <Link key={item.label} to={item.href}>
-                  <button className="px-6 py-2 text-sm bg-gradient-to-r from-indigo-100 to-purple-100 font-medium text-gray-700 hover:text-gray-900 rounded-lg transition-all hover:scale-105">
-                    {item.label}
-                  </button>
-                </Link>
-              ))}
-            </div>
-          )}
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {navItems.map((item) => (
+              <Link key={item.label} to={item.href}>
+                <button className="px-6 py-2 text-sm bg-gradient-to-r from-indigo-100 to-purple-100 font-medium text-gray-700 hover:text-gray-900 rounded-lg transition-all hover:scale-105">
+                  {item.label}
+                </button>
+              </Link>
+            ))}
+          </div>
 
-          {/* Tablet/mobile menu button */}
-          {isTabletView && (
+          {/* Mobile menu button */}
+          <div className="lg:hidden">
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="text-gray-700 bg-gradient-to-r from-indigo-400 to-purple-400 hover:text-gray-900 p-2 rounded-md transition-all"
@@ -61,12 +46,12 @@ export const Navbar = () => {
             >
               {mobileOpen ? <MdClose size={24} /> : <MdMenu size={24} />}
             </button>
-          )}
+          </div>
         </div>
 
-        {/* Tablet/mobile Navigation (shown when menu is open) */}
-        {isTabletView && mobileOpen && (
-          <div className="lg:hidden bg-white border-t border-gray-200">
+        {/* Mobile Navigation (no slide, just drop-down) */}
+        {mobileOpen && (
+          <div className="lg:hidden bg-white border-t border-gray-200 animate-fadeIn">
             <div className="px-2 pt-2 pb-4 space-y-2">
               {navItems.map((item) => (
                 <Link
