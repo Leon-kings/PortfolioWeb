@@ -73,11 +73,10 @@ export const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: <Twitter /> },
-    { icon: <GitHub /> },
-    { icon: <LinkedIn /> },
-    { icon: <Instagram /> },
-    { icon: <YouTube /> },
+   
+    { icon: <GitHub /> ,url:'https://github.com/Leon-kings'},
+    { icon: <LinkedIn />,url:'https://www.linkedin.com/in/akingeneye-leon-5302502b7/' },
+
   ];
 
   const quickLinks = [
@@ -111,15 +110,14 @@ export const Footer = () => {
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((link, index) => (
-                <motion.div
-                  key={index}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -3, scale: 1.1 }}
-                  className="text-gray-400 hover:text-indigo-400 transition-colors"
-                >
-                  {React.cloneElement(link.icon, { fontSize: "large" })}
-                </motion.div>
+                <Link key={index} to={link.url} target="_blank" rel="noopener noreferrer">
+                  <motion.div
+                    whileHover={{ y: -3, scale: 1.1 }}
+                    className="text-gray-400 hover:text-indigo-400 transition-colors"
+                  >
+                    {React.cloneElement(link.icon, { fontSize: "large" })}
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </div>

@@ -72,6 +72,7 @@ export default function App() {
                     <Route path="/7092/2416" element={<Experience />} />
                     <Route path="/7782/8191" element={<Message />} />
                     <Route path="/7893/1673" element={<Portfolio />} />
+                    
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </div>
