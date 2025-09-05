@@ -35,7 +35,7 @@ export const LoadingSpinner = () => {
           className="flex items-center space-x-2"
         >
           <span className="text-lg font-medium text-gray-700">
-            Loading your content
+            Leon Portfolio
           </span>
           <motion.div
             animate={{ 
@@ -71,7 +71,7 @@ export const LoadingSpinner = () => {
           transition={{ delay: 0.4, duration: 0.5 }}
           className="text-sm text-gray-500 max-w-md text-center px-4"
         >
-          Loading Status... just like brewing the perfect cup of coffee
+          Loading Status... 
         </motion.p>
       </div>
     </motion.div>
