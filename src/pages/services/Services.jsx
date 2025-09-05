@@ -289,7 +289,7 @@ export const Services = () => {
               onClick={() => openContactModal()}
               className="bg-gradient-to-r from-indigo-400 to-blue-600  text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300 flex items-center mx-auto"
             >
-              <Business className="mr-2" /> Get a Free Quote
+              <Business className="mr-2" /> Mail Us
             </button>
           </div>
         </div>

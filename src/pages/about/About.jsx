@@ -104,7 +104,7 @@ export const About = () => {
               </div>
 
               {/* Skills */}
-              <div className="mb-8">
+              {/* <div className="mb-8">
                 <h3 className="text-xl font-semibold text-gray-800 mb-6">
                   My Skills
                 </h3>
@@ -141,7 +141,7 @@ export const About = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </div> */}
 
               <button
                 onClick={handleOpen}

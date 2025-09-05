@@ -12,7 +12,6 @@ export const Navbar = () => {
     { label: "Services", href: "/7382/2922" },
     { label: "Experience", href: "/7092/2416" },
     { label: "Portfolio", href: "/7893/1673" },
-    { label: "Testimony", href: "/7782/8191" },
     { label: "Message us", href: "/7782/8191" },
   ];
 
