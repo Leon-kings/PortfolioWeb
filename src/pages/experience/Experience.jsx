@@ -102,16 +102,41 @@ export const Experience = () => {
     },
     {
       degree: "Certificate ,Software Developments",
-      university: "Kigali International Arts Colleges",
+      university: "Kigali International Arts Colleges [KIAC]",
       year: "2025",
       courses: [
         "Data Structures",
         "Web Development",
+        "PHP",
+        "Java",
+        "Database Systems",
+        "Animated Pages",
+        "MySQLi",
+      ],
+    },
+    {
+      degree: "Certificate ,Software Developments",
+      university: "KLabs [Knowledge Labs]",
+      year: "2025",
+      courses: [
+        "Web Development",
         "Database Systems",
         "Material UI",
-        "Animated Pages",
+        "Framer motions",
         "Nodemail",
         "MongoDB",
+        "API",
+      ],
+    },
+    {
+      degree: "Certificate ,Computer Foundermental",
+      university: "Technology Channel",
+      year: "2025",
+      courses: [
+        "Computer Maintenances",
+        "Computer Hardwares",
+        "Networkings",
+        "Programmings",
       ],
     },
   ];
