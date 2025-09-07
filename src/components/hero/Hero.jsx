@@ -35,7 +35,7 @@ export const Hero = () => {
 
     try {
       const response = await axios.post(
-        "https://leonstatusprofile.onrender.com/hire/me",
+        "https://leonstatusprofile.onrender.com/hire",
         formData,
         {
           headers: {
