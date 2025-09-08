@@ -19,7 +19,7 @@ export const Hero = () => {
     name: "",
     email: "",
     message: "",
-    budget: "",
+    budget: "$500-$1000",
   });
   const [modalScrollTop, setModalScrollTop] = useState(0);
 
@@ -80,7 +80,8 @@ export const Hero = () => {
       setErrorMessage(
         error.response?.data?.message ||
           error.message ||
-          "Failed to submit hire request. Please try again."
+          "Failed to submit hire request. Please try again,OR Message us on Contact Us componentnts"
+        
       );
 
       // Show error toast if you're using toast notifications
@@ -540,10 +541,10 @@ export const Hero = () => {
                           required
                         >
                           <option value="">Select budget range</option>
-                          <option value="500-1000">$500 - $1,000</option>
-                          <option value="1000-5000">$1,000 - $5,000</option>
-                          <option value="5000-10000">$5,000 - $10,000</option>
-                          <option value="10000+">$10,000+</option>
+                          <option value="500-1000"> $500-$1000 </option>
+                          <option value="1000-5000"> $1000-$5000 </option>
+                          <option value="5000-10000"> $5000-$10000 </option>
+                          <option value="10000+"> $10000+ </option>
                         </select>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                           <svg
