@@ -51,11 +51,7 @@ export default function App() {
             <Navbar />
 
             {/* Main Content with responsive grid */}
-            <main
-              className="main-content bg-gray-50 
-              px-3 sm:px-6 md:px-10 lg:px-16 xl:px-24 
-              py-6 sm:py-8 md:py-10 lg:py-12"
-            >
+            <main className="w-full bg-gray-50 ">
               <div
                 className="grid grid-cols-1 
                 sm:grid-cols-2 
@@ -64,7 +60,7 @@ export default function App() {
                 xl:grid-cols-5 
                 gap-6"
               >
-                <div className="col-span-full">
+                <div className="w-full col-span-full">
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/7382/2922" element={<Services />} />
@@ -72,7 +68,7 @@ export default function App() {
                     <Route path="/7092/2416" element={<Experience />} />
                     <Route path="/7782/8191" element={<Message />} />
                     <Route path="/7893/1673" element={<Portfolio />} />
-                    
+
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </div>

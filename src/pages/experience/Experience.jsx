@@ -143,7 +143,16 @@ export const Experience = () => {
 
   return (
     <section className="w-full py-16 md:py-24 bg-gray-50">
-      <div className="container mx-auto px-4">
+      <h2 className="hidden opacity-0 md:block">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum eveniet
+        sit quos impedit. Reiciendis in placeat at eligendi, explicabo magni
+        quae sit aperiam obcaecati, est quod maiores temporibus exercitationem
+        nulla! Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
+        eveniet sit quos impedit. Reiciendis in placeat at eligendi, explicabo
+        magni quae sit aperiam obcaecati, est quod maiores temporibus
+        exercitationem nulla!
+      </h2>
+      <div className="w-full">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <p className="text-indigo-600 font-medium mb-2 flex items-center justify-center">

@@ -44,16 +44,17 @@ export const Message = () => {
       setShowSuccessPage(true);
     } catch (error) {
       let errorMessage = "Something went wrong!";
-      
+
       if (error.response) {
-        errorMessage = error.response.data.message || 
-                      `Server responded with ${error.response.status}`;
+        errorMessage =
+          error.response.data.message ||
+          `Server responded with ${error.response.status}`;
       } else if (error.request) {
         errorMessage = "No response from server - please try again later";
       } else {
         errorMessage = error.message;
       }
-      
+
       toast.error(errorMessage);
       setSubmissionError(errorMessage);
     } finally {
@@ -68,6 +69,15 @@ export const Message = () => {
 
   return (
     <section className="w-full relative py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-violet-300 to-violet-500">
+      <h2 className="hidden opacity-0 md:block">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum eveniet
+        sit quos impedit. Reiciendis in placeat at eligendi, explicabo magni
+        quae sit aperiam obcaecati, est quod maiores temporibus exercitationem
+        nulla! Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
+        eveniet sit quos impedit. Reiciendis in placeat at eligendi, explicabo
+        magni quae sit aperiam obcaecati, est quod maiores temporibus
+        exercitationem nulla!
+      </h2>
       {/* SVG Decorations */}
       <div className="absolute top-0 left-0 w-full overflow-hidden">
         <svg
@@ -147,176 +157,184 @@ export const Message = () => {
             </motion.div>
 
             <div className="grid md:grid-cols-2 gap-12 items-center">
-                 <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="w-full h-auto"
-          >
-            <svg viewBox="0 0 500 500" className="w-full h-auto">
-              <rect
-                x="50"
-                y="50"
-                width="400"
-                height="400"
-                rx="20"
-                fill="#f0f9ff"
-                stroke="#3B82F6"
-                strokeWidth="2"
-              />
-
-              <motion.rect
-                x="100"
-                y="100"
-                width="300"
-                height="300"
-                rx="15"
-                fill="white"
-                stroke="#3B82F6"
-                strokeWidth="2"
-                animate={{ y: [100, 90, 100] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              />
-
-              <g transform="translate(0, -20)">
-                <motion.rect
-                  x="120"
-                  y="150"
-                  width="180"
-                  height="50"
-                  rx="10"
-                  fill="#e0f2fe"
-                  initial={{ width: 0 }}
-                  animate={{ width: 180 }}
-                  transition={{ duration: 0.5 }}
-                />
-                <text
-                  x="130"
-                  y="180"
-                  fontFamily="Arial"
-                  fontSize="14"
-                  fill="#0369a1"
-                >
-                  Hi there! Message us below
-                </text>
-
-                <motion.rect
-                  x="300"
-                  y="220"
-                  width="180"
-                  height="50"
-                  rx="10"
-                  fill="#3B82F6"
-                  initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: 180 }}
-                  transition={{ duration: 0.5, delay: 1 }}
-                />
-                <motion.text
-                  x="310"
-                  y="250"
-                  fontFamily="Arial"
-                  fontSize="14"
-                  fill="white"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 1.3 }}
-                >
-                  Hello Leon! I'd like to connect
-                </motion.text>
-
-                <motion.g
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 2.5 }}
-                >
-                  <motion.circle
-                    cx="140"
-                    cy="300"
-                    r="5"
-                    fill="#9ca3af"
-                    animate={{ cy: [300, 290, 300] }}
-                    transition={{ duration: 1, delay: 3, repeat: Infinity }}
-                  />
-                  <motion.circle
-                    cx="160"
-                    cy="300"
-                    r="5"
-                    fill="#9ca3af"
-                    animate={{ cy: [300, 290, 300] }}
-                    transition={{ duration: 1, delay: 3.2, repeat: Infinity }}
-                  />
-                  <motion.circle
-                    cx="180"
-                    cy="300"
-                    r="5"
-                    fill="#9ca3af"
-                    animate={{ cy: [300, 290, 300] }}
-                    transition={{ duration: 1, delay: 3.4, repeat: Infinity }}
-                  />
-                  <text
-                    x="200"
-                    y="305"
-                    fontFamily="Arial"
-                    fontSize="12"
-                    fill="#6b7280"
-                  >
-                    Leon is typing...
-                  </text>
-                </motion.g>
-              </g>
-
-              <motion.g transform="translate(150, 370)">
-                <motion.rect
-                  x="0"
-                  y="0"
-                  width="200"
-                  height="50"
-                  rx="25"
-                  fill="#3B82F6"
-                  animate={{ fill: ["#3B82F6", "#2563eb", "#3B82F6"] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                <motion.text
-                  x="100"
-                  y="30"
-                  fontFamily="Arial"
-                  fontSize="16"
-                  fill="white"
-                  textAnchor="middle"
-                  fontWeight="bold"
-                  animate={{ fontSize: ["16px", "17px", "16px"] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  Message Us Now
-                </motion.text>
-
-                <motion.polygon
-                  points="180,15 195,25 180,35"
-                  fill="white"
-                  animate={{
-                    points: [
-                      "180,15 195,25 180,35",
-                      "185,15 200,25 185,35",
-                      "180,15 195,25 180,35",
-                    ],
-                  }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                />
-              </motion.g>
-
-              <text
-                x="250"
-                y="80"
-                fontFamily="Arial"
-                fontSize="24"
-                fill="#3B82F6"
-                textAnchor="middle"
-                fontWeight="bold"
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="w-full h-auto"
               >
-                Leon
-              </text>
-            </svg>
-          </motion.div>
+                <svg viewBox="0 0 500 500" className="w-full h-auto">
+                  <rect
+                    x="50"
+                    y="50"
+                    width="400"
+                    height="400"
+                    rx="20"
+                    fill="#f0f9ff"
+                    stroke="#3B82F6"
+                    strokeWidth="2"
+                  />
+
+                  <motion.rect
+                    x="100"
+                    y="100"
+                    width="300"
+                    height="300"
+                    rx="15"
+                    fill="white"
+                    stroke="#3B82F6"
+                    strokeWidth="2"
+                    animate={{ y: [100, 90, 100] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  />
+
+                  <g transform="translate(0, -20)">
+                    <motion.rect
+                      x="120"
+                      y="150"
+                      width="180"
+                      height="50"
+                      rx="10"
+                      fill="#e0f2fe"
+                      initial={{ width: 0 }}
+                      animate={{ width: 180 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                    <text
+                      x="130"
+                      y="180"
+                      fontFamily="Arial"
+                      fontSize="14"
+                      fill="#0369a1"
+                    >
+                      Hi there! Message us below
+                    </text>
+
+                    <motion.rect
+                      x="300"
+                      y="220"
+                      width="180"
+                      height="50"
+                      rx="10"
+                      fill="#3B82F6"
+                      initial={{ opacity: 0, width: 0 }}
+                      animate={{ opacity: 1, width: 180 }}
+                      transition={{ duration: 0.5, delay: 1 }}
+                    />
+                    <motion.text
+                      x="310"
+                      y="250"
+                      fontFamily="Arial"
+                      fontSize="14"
+                      fill="white"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3, delay: 1.3 }}
+                    >
+                      Hello Leon! I'd like to connect
+                    </motion.text>
+
+                    <motion.g
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3, delay: 2.5 }}
+                    >
+                      <motion.circle
+                        cx="140"
+                        cy="300"
+                        r="5"
+                        fill="#9ca3af"
+                        animate={{ cy: [300, 290, 300] }}
+                        transition={{ duration: 1, delay: 3, repeat: Infinity }}
+                      />
+                      <motion.circle
+                        cx="160"
+                        cy="300"
+                        r="5"
+                        fill="#9ca3af"
+                        animate={{ cy: [300, 290, 300] }}
+                        transition={{
+                          duration: 1,
+                          delay: 3.2,
+                          repeat: Infinity,
+                        }}
+                      />
+                      <motion.circle
+                        cx="180"
+                        cy="300"
+                        r="5"
+                        fill="#9ca3af"
+                        animate={{ cy: [300, 290, 300] }}
+                        transition={{
+                          duration: 1,
+                          delay: 3.4,
+                          repeat: Infinity,
+                        }}
+                      />
+                      <text
+                        x="200"
+                        y="305"
+                        fontFamily="Arial"
+                        fontSize="12"
+                        fill="#6b7280"
+                      >
+                        Leon is typing...
+                      </text>
+                    </motion.g>
+                  </g>
+
+                  <motion.g transform="translate(150, 370)">
+                    <motion.rect
+                      x="0"
+                      y="0"
+                      width="200"
+                      height="50"
+                      rx="25"
+                      fill="#3B82F6"
+                      animate={{ fill: ["#3B82F6", "#2563eb", "#3B82F6"] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                    <motion.text
+                      x="100"
+                      y="30"
+                      fontFamily="Arial"
+                      fontSize="16"
+                      fill="white"
+                      textAnchor="middle"
+                      fontWeight="bold"
+                      animate={{ fontSize: ["16px", "17px", "16px"] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      Message Us Now
+                    </motion.text>
+
+                    <motion.polygon
+                      points="180,15 195,25 180,35"
+                      fill="white"
+                      animate={{
+                        points: [
+                          "180,15 195,25 180,35",
+                          "185,15 200,25 185,35",
+                          "180,15 195,25 180,35",
+                        ],
+                      }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    />
+                  </motion.g>
+
+                  <text
+                    x="250"
+                    y="80"
+                    fontFamily="Arial"
+                    fontSize="24"
+                    fill="#3B82F6"
+                    textAnchor="middle"
+                    fontWeight="bold"
+                  >
+                    Leon
+                  </text>
+                </svg>
+              </motion.div>
 
               <motion.form
                 initial={{ opacity: 0, x: 20 }}
