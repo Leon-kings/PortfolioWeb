@@ -81,7 +81,6 @@ export const Hero = () => {
         error.response?.data?.message ||
           error.message ||
           "Failed to submit hire request. Please try again,OR Message us on Contact Us componentnts"
-        
       );
 
       // Show error toast if you're using toast notifications
@@ -186,86 +185,86 @@ export const Hero = () => {
   return (
     <>
       <section className="hero w-full bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50 py-16 md:py-24">
-<div className="w-full px-4">
-  <div className="grid grid-cols-1 md:grid-cols-2 items-center w-full">
-    {/* Hero Content */}
-    <div className="mb-12 md:mb-0">
-      <div className="w-full">
-        <div className="w-full">
-          <p className="text-lg text-indigo-600 mb-2 font-medium">
-            Hello, I'm
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-3 bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
-            Leon AKINGENEYE
-          </h2>
-          <div className="mt-4 text-xl md:text-2xl text-gray-600 mb-6">
-            <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-indigo-100 px-2">
-              <span className="relative text-indigo-600 font-medium">
-                Web Designer
-              </span>
-            </span>
-            <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-purple-100 px-2 ml-2">
-              <span className="relative text-purple-600 font-medium">
-                Web Developer
-              </span>
-            </span>
-            <br />
-            <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-blue-100 px-2 ml-2">
-              <span className="relative text-blue-600 font-medium">
-                Front End Developer
-              </span>
-            </span>
-            <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-blue-100 px-2 ml-2">
-              <span className="relative text-green-600 font-medium">
-                Back End Developer
-              </span>
-            </span>
-            <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-blue-100 px-2 ml-2">
-              <span className="relative text-red-300 font-medium">
-                Graphic Designer
-              </span>
-            </span>
+        <div className="w-full px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center w-full">
+            {/* Hero Content */}
+            <div className="mb-12 md:mb-0">
+              <div className="w-full">
+                <div className="w-full">
+                  <p className="text-lg text-indigo-600 mb-2 font-medium">
+                    Hello, I'm
+                  </p>
+                  <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-3 bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+                    Leon AKINGENEYE
+                  </h2>
+                  <div className="mt-4 text-xl md:text-2xl text-gray-600 mb-6">
+                    <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-indigo-100 px-2">
+                      <span className="relative text-indigo-600 font-medium">
+                        Web Designer
+                      </span>
+                    </span>
+                    <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-purple-100 px-2 ml-2">
+                      <span className="relative text-purple-600 font-medium">
+                        Web Developer
+                      </span>
+                    </span>
+                    <br />
+                    <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-blue-100 px-2 ml-2">
+                      <span className="relative text-blue-600 font-medium">
+                        Front End Developer
+                      </span>
+                    </span>
+                    <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-blue-100 px-2 ml-2">
+                      <span className="relative text-green-600 font-medium">
+                        Back End Developer
+                      </span>
+                    </span>
+                    <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-blue-100 px-2 ml-2">
+                      <span className="relative text-red-300 font-medium">
+                        Graphic Designer
+                      </span>
+                    </span>
+                  </div>
+                </div>
+                <div className="justify-items-center w-full">
+                  <div className="w-full mt-25 justify-center items-center grid grid-cols-2 gap-4">
+                    <button
+                      onClick={() => setHireModalOpen(true)}
+                      className="btn bg-gradient-to-r from-indigo-400 to-purple-300 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                    >
+                      <WorkIcon className="mr-2" /> Hire Me
+                    </button>
+                    <button
+                      onClick={() => setContactModalOpen(true)}
+                      className="btn border-2 bg-gradient-to-r from-indigo-200 to-purple-200 hover:bg-indigo-50 px-6 py-3 rounded-lg flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-md"
+                    >
+                      <EmailIcon className="mr-2" /> Contact Me
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Hero Image */}
+            <div className="flex justify-center md:justify-center">
+              <div className="hero-image relative">
+                <div className="relative group">
+                  <img
+                    src={image}
+                    alt=""
+                    className="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-white shadow-xl transition-all duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 rounded-full bg-indigo-600 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                </div>
+                <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-full shadow-lg animate-bounce">
+                  <div className="bg-gradient-to-r from-indigo-100 to-purple-100 p-3 rounded-full">
+                    <WorkIcon className="text-indigo-600 size-6" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="mt-25 justify-center items-center grid grid-cols-2 gap-4">
-          <button
-            onClick={() => setHireModalOpen(true)}
-            className="btn bg-gradient-to-r from-indigo-400 to-purple-300 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
-          >
-            <WorkIcon className="mr-2" /> Hire Me
-          </button>
-          <button
-            onClick={() => setContactModalOpen(true)}
-            className="btn border-2 bg-gradient-to-r from-indigo-200 to-purple-200 hover:bg-indigo-50 px-6 py-3 rounded-lg flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-md"
-          >
-            <EmailIcon className="mr-2" /> Contact Me
-          </button>
-        </div>
-      </div>
-    </div>
-
-    {/* Hero Image */}
-    <div className="flex justify-center md:justify-end">
-      <div className="hero-image relative">
-        <div className="relative group">
-          <img
-            src={image}
-            alt=""
-            className="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-white shadow-xl transition-all duration-500 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 rounded-full bg-indigo-600 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-        </div>
-        <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-full shadow-lg animate-bounce">
-          <div className="bg-gradient-to-r from-indigo-100 to-purple-100 p-3 rounded-full">
-            <WorkIcon className="text-indigo-600 size-6" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
         {/* Hire Me Modal */}
         {hireModalOpen && (

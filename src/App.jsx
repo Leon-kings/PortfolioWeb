@@ -26,8 +26,8 @@ export default function App() {
   }, []);
 
   return (
-    <>
-      <div className="w-full min-h-screen grid grid-rows-[auto,1fr,auto]">
+ 
+      <div className="w-full min-h-screen overflow-x-hidden grid grid-rows-[auto,1fr,auto]">
         {/* Loading Spinner */}
         {isLoading && <LoadingSpinner />}
 
@@ -60,7 +60,7 @@ export default function App() {
                 xl:grid-cols-5 
                 gap-6"
               >
-                <div className="w-full col-span-full">
+                {/* <div className="w-full col-span-full">
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/7382/2922" element={<Services />} />
@@ -71,7 +71,7 @@ export default function App() {
 
                     <Route path="*" element={<NotFound />} />
                   </Routes>
-                </div>
+                </div> */}
               </div>
 
               {/* Page-level Toast */}
@@ -93,6 +93,6 @@ export default function App() {
           </>
         )}
       </div>
-    </>
+   
   );
 }

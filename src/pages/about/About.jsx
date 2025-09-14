@@ -7,6 +7,8 @@ import {
   School,
   Download,
   Article,
+  DesignServicesTwoTone,
+  Settings,
 } from "@mui/icons-material";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -51,19 +53,31 @@ export const About = () => {
       name: "Backend Development",
       percent: 90,
       icon: <DataObject className="text-purple-600" />,
-      tech: ["Node.js", "Express", "PHP"],
+      tech: ["Node JS", "Express", "PHP"],
     },
     {
       name: "UI/UX Design",
       percent: 85,
-      icon: <DesignServices className="text-blue-600" />,
+      icon: <DesignServices className="text-violet-600" />,
       tech: ["Material UI", "Framer Motion", "Typography"],
+    },
+    {
+      name: "Graphic Design",
+      percent: 75,
+      icon: <DesignServicesTwoTone className="text-blue-600" />,
+      tech: ["Photoshop", "Illustrator"],
+    },
+    {
+      name: "Computer Maintenance",
+      percent: 85,
+      icon: <Settings className="text-indigo-600" />,
+      tech: ["Hard Ware", "Software", "Troubleshooting"],
     },
   ];
 
   return (
     <>
-      <section className="w-full py-16 md:py-24 bg-white">
+      <section className="w-full  md:w-full py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* About Image */}
@@ -104,7 +118,7 @@ export const About = () => {
               </div>
 
               {/* Skills */}
-              {/* <div className="mb-8">
+              <div className="mb-8 w-full bg-gradient-to-l from-violet-300 to-indigo-300 p-6 rounded-2xl shadow-2xl">
                 <h3 className="text-xl font-semibold text-gray-800 mb-6">
                   My Skills
                 </h3>
@@ -122,9 +136,9 @@ export const About = () => {
                         </div>
                         <span className="text-gray-600">{skill.percent}%</span>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2.5">
+                      <div className="w-full bg-gray-200 rounded-full h-4">
                         <div
-                          className="bg-gradient-to-r from-indigo-500 to-purple-600 h-2.5 rounded-full"
+                          className="bg-gradient-to-r from-indigo-500 to-purple-600 h-4 rounded-full"
                           style={{ width: `${skill.percent}%` }}
                         ></div>
                       </div>
@@ -141,7 +155,7 @@ export const About = () => {
                     </div>
                   ))}
                 </div>
-              </div> */}
+              </div>
 
               <button
                 onClick={handleOpen}

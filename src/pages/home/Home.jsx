@@ -8,7 +8,7 @@ import { Portfolio } from "../../components/portfolio/Portfolio";
 export default function Home() {
   return (
     <>
-      <div className="w-full text-black">
+      <div className="w-full overflow-hidden text-black">
         <Hero />
         <About />
         <Services />
