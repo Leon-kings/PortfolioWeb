@@ -60,7 +60,7 @@ export default function App() {
                 xl:grid-cols-5 
                 gap-6"
               >
-                {/* <div className="w-full col-span-full">
+                <div className="w-full col-span-full">
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/7382/2922" element={<Services />} />
@@ -71,7 +71,7 @@ export default function App() {
 
                     <Route path="*" element={<NotFound />} />
                   </Routes>
-                </div> */}
+                </div>
               </div>
 
               {/* Page-level Toast */}
