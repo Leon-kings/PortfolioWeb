@@ -69,15 +69,7 @@ export const Message = () => {
 
   return (
     <section className="w-full relative py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-violet-300 to-violet-500">
-      <h2 className="hidden opacity-0 md:block">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum eveniet
-        sit quos impedit. Reiciendis in placeat at eligendi, explicabo magni
-        quae sit aperiam obcaecati, est quod maiores temporibus exercitationem
-        nulla! Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
-        eveniet sit quos impedit. Reiciendis in placeat at eligendi, explicabo
-        magni quae sit aperiam obcaecati, est quod maiores temporibus
-        exercitationem nulla!
-      </h2>
+
       {/* SVG Decorations */}
       <div className="absolute top-0 left-0 w-full overflow-hidden">
         <svg
@@ -145,7 +137,7 @@ export const Message = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-12"
+              className="text-center w-full mb-12"
             >
               <h2 className="text-4xl font-bold text-gray-900 mb-4">
                 Get in Touch
@@ -156,7 +148,7 @@ export const Message = () => {
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="grid w-full md:grid-cols-2 gap-12 items-center">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -341,7 +333,7 @@ export const Message = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 onSubmit={handleSubmit}
-                className="bg-white text-black p-8 rounded-2xl shadow-xl border border-gray-100"
+                className="bg-white text-black w-full p-8 rounded-2xl shadow-xl border border-gray-100"
               >
                 {submissionError && (
                   <motion.div
