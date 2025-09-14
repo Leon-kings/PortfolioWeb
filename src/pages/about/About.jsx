@@ -118,7 +118,7 @@ export const About = () => {
               </div>
 
               {/* Skills */}
-              <div className="mb-8 w-full bg-gradient-to-l from-violet-300 to-indigo-300 p-6 rounded-2xl shadow-2xl">
+              <div className="mb-8 w-full bg-gradient-to-r from-violet-100 to-indigo-200 p-6 rounded-2xl shadow-2xl">
                 <h3 className="text-xl font-semibold text-gray-800 mb-6">
                   My Skills
                 </h3>

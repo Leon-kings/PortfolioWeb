@@ -8,6 +8,7 @@ import {
   Close,
   GitHub,
   OpenInNew,
+  NavigateNext,
 } from "@mui/icons-material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,6 +18,8 @@ export const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState("*");
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const projectsPerPage = 6;
 
   const filters = [
     { id: "*", name: "All", icon: <ExpandMore /> },
@@ -34,7 +37,14 @@ export const Portfolio = () => {
         "https://www.shutterstock.com/image-photo/singapore-november-06-2023-interior-600nw-2408572559.jpg",
       description:
         "Hexalio is your shopping destination for fashion, home, beauty, kids' clothes and more. Browse the latest collections and find quality pieces at affordable ...",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe API"],
+      technologies: [
+        "React JS",
+        "Node JS",
+        "MongoDB",
+        "Stripe API",
+        "Nodemailer",
+        "Tailwind CSS",
+      ],
       links: {
         live: "https://hexalio.vercel.app/",
         code: "https://github.com/Leon-kings/Hexalios",
@@ -48,7 +58,14 @@ export const Portfolio = () => {
         "https://www.ca.kayak.com/rimg/dimg/dynamic/186/2023/08/295ffd3a54bd51fc33810ce59382d1da.webp",
       description:
         "Browse Hotels · Mövenpick Kigali (Opening September 2025) · Mantis Kivu Queen uBuranga · Mantis EPIC Hotel & Suites · Mantis Akagera Game Lodge · Mantis Kivu ",
-      technologies: ["React JS", "axios", "Node JS", "MongoDB", "Stripe"],
+      technologies: [
+        "React JS",
+        "Node JS",
+        "MongoDB",
+        "Stripe API",
+        "Nodemailer",
+        "Tailwind CSS",
+      ],
       links: {
         live: "https://ld-hotels.vercel.app",
         code: "https://github.com/Leon-kings/Hotels",
@@ -57,14 +74,14 @@ export const Portfolio = () => {
     {
       id: 3,
       title: "Internet Speed Monitor",
-      category: "Mobile",
+      category: "mobile",
       image:
         "https://i.pcmag.com/imagery/articles/03xdeDG4m4n0gJG3CbFNIgm-17..v1661444591.png",
       description:
         "How fast is your download speed? In seconds, ISP's simple Internet speed test will estimate your ISP speed",
-      technologies: ["React", "JS", "Tailwinds"],
+      technologies: ["React JS", "Tailwind CSS"],
       links: {
-        live: "https://word-game.example.com",
+        live: "https://internet-speed-gamma.vercel.app/",
         code: "https://github.com/Leon-kings/ISP-Tests",
       },
     },
@@ -76,7 +93,14 @@ export const Portfolio = () => {
         "https://5.imimg.com/data5/SELLER/Default/2024/11/467259570/KS/GL/VW/211422720/oob-automation-security-and-surveillance.jpg",
       description:
         "From wireless surveillance systems to smart home cameras, our range offers reliable and high-quality options to keep your home or business safe and secure.",
-      technologies: ["React JS", "Node JS", "Express", "MongoDB", "Nodemailer"],
+      technologies: [
+        "React JS",
+        "Node JS",
+        "MongoDB",
+        "Stripe API",
+        "Nodemailer",
+        "Tailwind CSS",
+      ],
       links: {
         live: "https://home-safety.vercel.app",
         code: "https://github.com/Leon-kings/CamSafety",
@@ -85,12 +109,19 @@ export const Portfolio = () => {
     {
       id: 5,
       title: "Coffee Shop App",
-      category: "Web",
+      category: "web",
       image:
         "https://cdn.shopify.com/s/files/1/0491/2165/6981/files/Eco-Friendly_and_Sustainable_480x480.webp?v=1733402305",
       description:
         "This is probably Rwanda's most famous coffee shop with two branches in Kigali. It is billed as a social enterprise, supporting women coffee growers.",
-      technologies: ["React JS", "Node JS", "Express", "MongoDB", "Nodemailer"],
+      technologies: [
+        "React JS",
+        "Node JS",
+        "MongoDB",
+        "Stripe API",
+        "Nodemailer",
+        "Tailwind CSS",
+      ],
       links: {
         live: "https://coffee-app-six-delta.vercel.app",
         code: "https://github.com/Leon-kings/coffee-app",
@@ -99,12 +130,40 @@ export const Portfolio = () => {
     {
       id: 6,
       title: "Restaurants",
-      category: "Web",
+      category: "web",
       image:
         "https://images.ctfassets.net/trvmqu12jq2l/6FV4Opt7wUyR91t2FXyOIr/f32972fce10fc87585e831b334ea17ef/header.jpg?q=70&w=1208&h=1080&f=faces&fit=fill",
       description:
         "Experience our Afro fusion cuisine at the boho restaurant, offering stunning views, laid-back vibes, and a perfect setting for your next business lunch.",
-      technologies: ["React JS", "Node JS", "Express", "MongoDB", "Nodemailer"],
+      technologies: [
+        "React JS",
+        "Node JS",
+        "MongoDB",
+        "Stripe API",
+        "Nodemailer",
+        "Tailwind CSS",
+      ],
+      links: {
+        live: "https://restorantapp.vercel.app",
+        code: "https://github.com/Leon-kings/Restorant",
+      },
+    },
+    {
+      id: 6,
+      title: "Restaurants",
+      category: "web",
+      image:
+        "https://images.ctfassets.net/trvmqu12jq2l/6FV4Opt7wUyR91t2FXyOIr/f32972fce10fc87585e831b334ea17ef/header.jpg?q=70&w=1208&h=1080&f=faces&fit=fill",
+      description:
+        "Experience our Afro fusion cuisine at the boho restaurant, offering stunning views, laid-back vibes, and a perfect setting for your next business lunch.",
+      technologies: [
+        "React JS",
+        "Node JS",
+        "MongoDB",
+        "Stripe API",
+        "Nodemailer",
+        "Tailwind CSS",
+      ],
       links: {
         live: "https://restorantapp.vercel.app",
         code: "https://github.com/Leon-kings/Restorant",
@@ -117,6 +176,25 @@ export const Portfolio = () => {
       ? projects
       : projects.filter((project) => project.category === activeFilter);
 
+  // Calculate pagination
+  const indexOfLastProject = currentPage * projectsPerPage;
+  const indexOfFirstProject = indexOfLastProject - projectsPerPage;
+  const currentProjects = filteredProjects.slice(
+    indexOfFirstProject,
+    indexOfLastProject
+  );
+  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+
+  // Check if we need to show the next page button
+  const showNextButton =
+    filteredProjects.length > projectsPerPage && currentPage < totalPages;
+
+  // Handle filter change - reset to first page
+  const handleFilterChange = (filterId) => {
+    setActiveFilter(filterId);
+    setCurrentPage(1);
+  };
+
   const openProjectModal = (project) => {
     setSelectedProject(project);
     setIsModalOpen(true);
@@ -127,8 +205,20 @@ export const Portfolio = () => {
     setSelectedProject(null);
   };
 
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
-    <section className="w-full py-16 md:py-24 bg-white" id="portfolio">
+    <section className="w-full py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
@@ -149,11 +239,11 @@ export const Portfolio = () => {
           {filters.map((filter) => (
             <button
               key={filter.id}
-              onClick={() => setActiveFilter(filter.id)}
-              className={`px-4 py-2 rounded-full bg-gradient-to-r from-indigo-300 to-purple-300 flex items-center transition-colors duration-200 ${
+              onClick={() => handleFilterChange(filter.id)}
+              className={`px-4 py-2 rounded-full flex items-center transition-colors duration-200 ${
                 activeFilter === filter.id
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  ? "bg-gradient-to-r from-indigo-400 to-purple-400 text-white"
+                  : "bg-gradient-to-r from-indigo-300 to-indigo-400"
               }`}
             >
               <span className="mr-2">{filter.icon}</span>
@@ -163,11 +253,11 @@ export const Portfolio = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {currentProjects.map((project) => (
             <div
               key={project.id}
-              className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+              className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
               onClick={() => openProjectModal(project)}
             >
               <div className="h-64 overflow-hidden">
@@ -191,6 +281,34 @@ export const Portfolio = () => {
           ))}
         </div>
 
+        {/* Pagination Controls */}
+        <div className="flex justify-center items-center gap-4 mt-8">
+          {currentPage > 1 && (
+            <button
+              onClick={prevPage}
+              className="px-4 py-2 bg-gradient-to-l from-indigo-300 to-indigo-200 transition-colors duration-200 flex items-center"
+            >
+              <NavigateNext className="rotate-180 mr-2" /> Previous
+            </button>
+          )}
+
+          {showNextButton && (
+            <button
+              onClick={nextPage}
+              className="px-4 py-2 bg-gradient-to-r from-indigo-400 to-purple-300 text-white rounded-lg transition-colors duration-200 flex items-center"
+            >
+              Next Page <NavigateNext className="ml-2" />
+            </button>
+          )}
+        </div>
+
+        {/* Page Indicator */}
+        {totalPages > 1 && (
+          <div className="text-center mt-4 font-bold text-gray-600">
+            Page {currentPage} of {totalPages}
+          </div>
+        )}
+
         {/* Project Modal */}
         {isModalOpen && selectedProject && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4">
@@ -199,7 +317,7 @@ export const Portfolio = () => {
                 {/* Close Button */}
                 <button
                   onClick={closeModal}
-                  className="absolute top-4 right-4 z-10 text-gray-500 hover:text-gray-700 bg-white rounded-full p-2 shadow-md"
+                  className="absolute top-4 right-4 z-10 bg-gradient-to-l from-red-400 to-red-500 rounded-full p-2 shadow-md"
                 >
                   <Close />
                 </button>
@@ -240,7 +358,6 @@ export const Portfolio = () => {
                   <div className="flex flex-wrap gap-4 mb-6">
                     {selectedProject.links.live && (
                       <button
-                      
                         onClick={() => {
                           const newWindow = window.open("", "_blank");
                           newWindow.document.write(`
