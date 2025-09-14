@@ -219,6 +219,7 @@ export const Hero = () => {
                         Back End Developer
                       </span>
                     </span>
+                    <br />
                     <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-blue-100 px-2 ml-2">
                       <span className="relative text-red-300 font-medium">
                         Graphic Designer
