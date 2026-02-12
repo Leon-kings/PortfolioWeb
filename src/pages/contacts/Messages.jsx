@@ -1,511 +1,3 @@
-// /* eslint-disable no-unused-vars */
-// import React, { useState } from "react";
-// import { motion } from "framer-motion";
-// import { toast, ToastContainer } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-// import axios from "axios";
-
-// export const Message = () => {
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     email: "",
-//     message: "",
-//   });
-//   const [isSubmitting, setIsSubmitting] = useState(false);
-//   const [showSuccessPage, setShowSuccessPage] = useState(false);
-//   const [submissionError, setSubmissionError] = useState(null);
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData((prev) => ({
-//       ...prev,
-//       [name]: value,
-//     }));
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setIsSubmitting(true);
-//     setSubmissionError(null);
-
-//     try {
-//       const response = await axios.post(
-//         "https://leonstatusprofile.onrender.com/messages",
-//         formData,
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-
-//       toast.success("Message sent successfully!");
-//       setFormData({ name: "", email: "", message: "" });
-//       setShowSuccessPage(true);
-//     } catch (error) {
-//       let errorMessage = "Something went wrong!";
-
-//       if (error.response) {
-//         errorMessage =
-//           error.response.data.message ||
-//           `Server responded with ${error.response.status}`;
-//       } else if (error.request) {
-//         errorMessage = "No response from server - please try again later";
-//       } else {
-//         errorMessage = error.message;
-//       }
-
-//       toast.error(errorMessage);
-//       setSubmissionError(errorMessage);
-//     } finally {
-//       setIsSubmitting(false);
-//     }
-//   };
-
-//   const resetForm = () => {
-//     setShowSuccessPage(false);
-//     setSubmissionError(null);
-//   };
-
-//   return (
-//     <section className="w-full relative py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-violet-300 to-violet-500">
-
-//       {/* SVG Decorations */}
-//       <div className="absolute top-0 left-0 w-full overflow-hidden">
-//         <svg
-//           className="w-full h-24 text-blue-100"
-//           viewBox="0 0 1200 120"
-//           preserveAspectRatio="none"
-//         >
-//           <path
-//             d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
-//             opacity=".25"
-//             fill="currentColor"
-//           ></path>
-//           <path
-//             d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
-//             opacity=".5"
-//             fill="currentColor"
-//           ></path>
-//           <path
-//             d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
-//             fill="currentColor"
-//           ></path>
-//         </svg>
-//       </div>
-
-//       <div className="max-w-4xl mx-auto">
-//         {showSuccessPage ? (
-//           <motion.div
-//             initial={{ opacity: 0, scale: 0.9 }}
-//             animate={{ opacity: 1, scale: 1 }}
-//             transition={{ duration: 0.5 }}
-//             className="bg-white text-black p-8 rounded-2xl shadow-xl border border-gray-100 text-center"
-//           >
-//             <svg
-//               className="w-20 h-20 mx-auto text-green-500 mb-6"
-//               fill="none"
-//               stroke="currentColor"
-//               viewBox="0 0 24 24"
-//               xmlns="http://www.w3.org/2000/svg"
-//             >
-//               <path
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//                 strokeWidth={2}
-//                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-//               />
-//             </svg>
-//             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-//               Message Sent Successfully!
-//             </h2>
-//             <p className="text-lg text-gray-600 mb-8">
-//               Thank you for reaching out. I'll get back to you soon.
-//             </p>
-//             <motion.button
-//               onClick={resetForm}
-//               whileHover={{ scale: 1.02 }}
-//               whileTap={{ scale: 0.98 }}
-//               className="bg-gradient-to-r from-blue-600 to-blue-500 text-white py-3 px-8 rounded-lg font-medium shadow-md hover:shadow-lg transition-all"
-//             >
-//               Send Another Message
-//             </motion.button>
-//           </motion.div>
-//         ) : (
-//           <>
-//             <motion.div
-//               initial={{ opacity: 0, y: 20 }}
-//               whileInView={{ opacity: 1, y: 0 }}
-//               transition={{ duration: 0.6 }}
-//               className="text-center w-full mb-12"
-//             >
-//               <h2 className="text-4xl font-bold text-gray-900 mb-4">
-//                 Get in Touch
-//               </h2>
-//               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-//                 Have a project in mind or want to collaborate? Drop me a message
-//                 below.
-//               </p>
-//             </motion.div>
-
-//             <div className="grid w-full md:grid-cols-2 gap-12 items-center">
-//               <motion.div
-//                 initial={{ opacity: 0 }}
-//                 animate={{ opacity: 1 }}
-//                 transition={{ duration: 0.5 }}
-//                 className="w-full h-auto"
-//               >
-//                 <svg viewBox="0 0 500 500" className="w-full h-auto">
-//                   <rect
-//                     x="50"
-//                     y="50"
-//                     width="400"
-//                     height="400"
-//                     rx="20"
-//                     fill="#f0f9ff"
-//                     stroke="#3B82F6"
-//                     strokeWidth="2"
-//                   />
-
-//                   <motion.rect
-//                     x="100"
-//                     y="100"
-//                     width="300"
-//                     height="300"
-//                     rx="15"
-//                     fill="white"
-//                     stroke="#3B82F6"
-//                     strokeWidth="2"
-//                     animate={{ y: [100, 90, 100] }}
-//                     transition={{ duration: 3, repeat: Infinity }}
-//                   />
-
-//                   <g transform="translate(0, -20)">
-//                     <motion.rect
-//                       x="120"
-//                       y="150"
-//                       width="180"
-//                       height="50"
-//                       rx="10"
-//                       fill="#e0f2fe"
-//                       initial={{ width: 0 }}
-//                       animate={{ width: 180 }}
-//                       transition={{ duration: 0.5 }}
-//                     />
-//                     <text
-//                       x="130"
-//                       y="180"
-//                       fontFamily="Arial"
-//                       fontSize="14"
-//                       fill="#0369a1"
-//                     >
-//                       Hi there! Message us below
-//                     </text>
-
-//                     <motion.rect
-//                       x="300"
-//                       y="220"
-//                       width="180"
-//                       height="50"
-//                       rx="10"
-//                       fill="#3B82F6"
-//                       initial={{ opacity: 0, width: 0 }}
-//                       animate={{ opacity: 1, width: 180 }}
-//                       transition={{ duration: 0.5, delay: 1 }}
-//                     />
-//                     <motion.text
-//                       x="310"
-//                       y="250"
-//                       fontFamily="Arial"
-//                       fontSize="14"
-//                       fill="white"
-//                       initial={{ opacity: 0 }}
-//                       animate={{ opacity: 1 }}
-//                       transition={{ duration: 0.3, delay: 1.3 }}
-//                     >
-//                       Hello Leon! I'd like to connect
-//                     </motion.text>
-
-//                     <motion.g
-//                       initial={{ opacity: 0 }}
-//                       animate={{ opacity: 1 }}
-//                       transition={{ duration: 0.3, delay: 2.5 }}
-//                     >
-//                       <motion.circle
-//                         cx="140"
-//                         cy="300"
-//                         r="5"
-//                         fill="#9ca3af"
-//                         animate={{ cy: [300, 290, 300] }}
-//                         transition={{ duration: 1, delay: 3, repeat: Infinity }}
-//                       />
-//                       <motion.circle
-//                         cx="160"
-//                         cy="300"
-//                         r="5"
-//                         fill="#9ca3af"
-//                         animate={{ cy: [300, 290, 300] }}
-//                         transition={{
-//                           duration: 1,
-//                           delay: 3.2,
-//                           repeat: Infinity,
-//                         }}
-//                       />
-//                       <motion.circle
-//                         cx="180"
-//                         cy="300"
-//                         r="5"
-//                         fill="#9ca3af"
-//                         animate={{ cy: [300, 290, 300] }}
-//                         transition={{
-//                           duration: 1,
-//                           delay: 3.4,
-//                           repeat: Infinity,
-//                         }}
-//                       />
-//                       <text
-//                         x="200"
-//                         y="305"
-//                         fontFamily="Arial"
-//                         fontSize="12"
-//                         fill="#6b7280"
-//                       >
-//                         Leon is typing...
-//                       </text>
-//                     </motion.g>
-//                   </g>
-
-//                   <motion.g transform="translate(150, 370)">
-//                     <motion.rect
-//                       x="0"
-//                       y="0"
-//                       width="200"
-//                       height="50"
-//                       rx="25"
-//                       fill="#3B82F6"
-//                       animate={{ fill: ["#3B82F6", "#2563eb", "#3B82F6"] }}
-//                       transition={{ duration: 2, repeat: Infinity }}
-//                     />
-//                     <motion.text
-//                       x="100"
-//                       y="30"
-//                       fontFamily="Arial"
-//                       fontSize="16"
-//                       fill="white"
-//                       textAnchor="middle"
-//                       fontWeight="bold"
-//                       animate={{ fontSize: ["16px", "17px", "16px"] }}
-//                       transition={{ duration: 1.5, repeat: Infinity }}
-//                     >
-//                       Message Us Now
-//                     </motion.text>
-
-//                     <motion.polygon
-//                       points="180,15 195,25 180,35"
-//                       fill="white"
-//                       animate={{
-//                         points: [
-//                           "180,15 195,25 180,35",
-//                           "185,15 200,25 185,35",
-//                           "180,15 195,25 180,35",
-//                         ],
-//                       }}
-//                       transition={{ duration: 1.5, repeat: Infinity }}
-//                     />
-//                   </motion.g>
-
-//                   <text
-//                     x="250"
-//                     y="80"
-//                     fontFamily="Arial"
-//                     fontSize="24"
-//                     fill="#3B82F6"
-//                     textAnchor="middle"
-//                     fontWeight="bold"
-//                   >
-//                     Leon
-//                   </text>
-//                 </svg>
-//               </motion.div>
-
-//               <motion.form
-//                 initial={{ opacity: 0, x: 20 }}
-//                 whileInView={{ opacity: 1, x: 0 }}
-//                 transition={{ duration: 0.6, delay: 0.2 }}
-//                 onSubmit={handleSubmit}
-//                 className="bg-white text-black w-full p-8 rounded-2xl shadow-xl border border-gray-100"
-//               >
-//                 {submissionError && (
-//                   <motion.div
-//                     initial={{ opacity: 0, y: -20 }}
-//                     animate={{ opacity: 1, y: 0 }}
-//                     className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700"
-//                   >
-//                     <p>{submissionError}</p>
-//                   </motion.div>
-//                 )}
-
-//                 <div className="mb-6">
-//                   <label
-//                     htmlFor="name"
-//                     className="block text-sm font-medium text-gray-700 mb-2"
-//                   >
-//                     Your Name
-//                   </label>
-//                   <input
-//                     type="text"
-//                     id="name"
-//                     name="name"
-//                     value={formData.name}
-//                     onChange={handleChange}
-//                     required
-//                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-//                     placeholder="John Doe"
-//                   />
-//                 </div>
-
-//                 <div className="mb-6">
-//                   <label
-//                     htmlFor="email"
-//                     className="block text-sm font-medium text-gray-700 mb-2"
-//                   >
-//                     Email Address
-//                   </label>
-//                   <input
-//                     type="email"
-//                     id="email"
-//                     name="email"
-//                     value={formData.email}
-//                     onChange={handleChange}
-//                     required
-//                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-//                     placeholder="you@example.com"
-//                   />
-//                 </div>
-
-//                 <div className="mb-8">
-//                   <label
-//                     htmlFor="message"
-//                     className="block text-sm font-medium text-gray-700 mb-2"
-//                   >
-//                     Your Message
-//                   </label>
-//                   <textarea
-//                     id="message"
-//                     name="message"
-//                     value={formData.message}
-//                     onChange={handleChange}
-//                     required
-//                     rows="5"
-//                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-//                     placeholder="Tell me about your project..."
-//                   ></textarea>
-//                 </div>
-
-//                 <motion.button
-//                   type="submit"
-//                   disabled={isSubmitting}
-//                   whileHover={{ scale: 1.02 }}
-//                   whileTap={{ scale: 0.98 }}
-//                   className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-3 px-6 rounded-lg font-medium shadow-md hover:shadow-lg transition-all disabled:opacity-70 disabled:cursor-not-allowed"
-//                 >
-//                   {isSubmitting ? (
-//                     <span className="flex items-center justify-center">
-//                       <svg
-//                         className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-//                         xmlns="http://www.w3.org/2000/svg"
-//                         fill="none"
-//                         viewBox="0 0 24 24"
-//                       >
-//                         <circle
-//                           className="opacity-25"
-//                           cx="12"
-//                           cy="12"
-//                           r="10"
-//                           stroke="currentColor"
-//                           strokeWidth="4"
-//                         ></circle>
-//                         <path
-//                           className="opacity-75"
-//                           fill="currentColor"
-//                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-//                         ></path>
-//                       </svg>
-//                       Sending...
-//                     </span>
-//                   ) : (
-//                     "Send Message"
-//                   )}
-//                 </motion.button>
-//               </motion.form>
-//             </div>
-//           </>
-//         )}
-//       </div>
-
-//       {/* Bottom SVG Decoration */}
-//       <div className="absolute bottom-0 left-0 w-full overflow-hidden rotate-180">
-//         <svg
-//           className="w-full h-24 text-blue-100"
-//           viewBox="0 0 1200 120"
-//           preserveAspectRatio="none"
-//         >
-//           <path
-//             d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
-//             opacity=".25"
-//             fill="currentColor"
-//           ></path>
-//           <path
-//             d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
-//             opacity=".5"
-//             fill="currentColor"
-//           ></path>
-//           <path
-//             d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
-//             fill="currentColor"
-//           ></path>
-//         </svg>
-//       </div>
-
-//       <ToastContainer
-//         position="top-right"
-//         autoClose={5000}
-//         hideProgressBar={false}
-//         newestOnTop={false}
-//         closeOnClick
-//         rtl={false}
-//         pauseOnFocusLoss
-//         draggable
-//         pauseOnHover
-//         theme="colored"
-//       />
-//     </section>
-//   );
-// };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -528,6 +20,14 @@ import MarkunreadIcon from '@mui/icons-material/Markunread';
 import ForumIcon from '@mui/icons-material/Forum';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import VerifiedIcon from '@mui/icons-material/Verified';
+import PhoneIcon from '@mui/icons-material/Phone';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import DownloadIcon from '@mui/icons-material/Download';
 
 export const Message = () => {
   const [formData, setFormData] = useState({
@@ -540,6 +40,8 @@ export const Message = () => {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [submissionError, setSubmissionError] = useState(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -551,20 +53,24 @@ export const Message = () => {
 
   const validateForm = () => {
     if (!formData.name.trim()) {
-      toast.warning("Please enter your name");
+      toast.warning("👤 Please enter your name");
       return false;
     }
     if (!formData.email.trim()) {
-      toast.warning("Please enter your email");
+      toast.warning("📧 Please enter your email");
       return false;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      toast.warning("Please enter a valid email address");
+      toast.warning("📧 Please enter a valid email address");
       return false;
     }
     if (!formData.message.trim()) {
-      toast.warning("Please enter your message");
+      toast.warning("💬 Please enter your message");
+      return false;
+    }
+    if (formData.message.trim().length < 10) {
+      toast.warning("📝 Message should be at least 10 characters");
       return false;
     }
     return true;
@@ -593,7 +99,15 @@ export const Message = () => {
         }
       );
 
-      toast.success("✨ Message delivered successfully!");
+      toast.success("✨ Message delivered successfully!", {
+        icon: "🚀",
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      
       setFormData({ name: "", email: "", message: "" });
       setShowSuccessModal(true);
     } catch (error) {
@@ -609,7 +123,14 @@ export const Message = () => {
         errorMessage = error.message;
       }
 
-      toast.error(errorMessage);
+      toast.error(`❌ ${errorMessage}`, {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      
       setSubmissionError(errorMessage);
       setShowErrorModal(true);
     } finally {
@@ -623,47 +144,98 @@ export const Message = () => {
     setSubmissionError(null);
   };
 
+  const copyToClipboard = (text, type) => {
+    navigator.clipboard.writeText(text);
+    if (type === 'email') {
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000);
+      toast.success("📋 Email copied to clipboard!");
+    } else if (type === 'phone') {
+      setCopiedPhone(true);
+      setTimeout(() => setCopiedPhone(false), 2000);
+      toast.success("📋 Phone number copied to clipboard!");
+    }
+  };
+
+  // Animation variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
+  const fadeInLeft = {
+    hidden: { opacity: 0, x: -30 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+  };
+
+  const fadeInRight = {
+    hidden: { opacity: 0, x: 30 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6, delay: 0.2 } },
+  };
+
+  const scaleIn = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+  };
+
+  const modalVariants = {
+    hidden: { opacity: 0, scale: 0.9, y: 50 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 300, damping: 25 },
+    },
+    exit: { opacity: 0, scale: 0.9, y: 50, transition: { duration: 0.2 } },
+  };
+
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+    exit: { opacity: 0 },
+  };
+
   return (
-    <section className="w-full relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-950 overflow-hidden">
+    <section className="w-full relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-indigo-950 overflow-hidden">
       
       {/* Professional Background Pattern */}
       <div className="absolute inset-0 opacity-5 dark:opacity-10">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-blue-600"/>
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-blue-600 dark:text-blue-400"/>
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid)" />
         </svg>
       </div>
 
-      {/* Decorative Elements */}
+      {/* Decorative Blobs */}
       <div className="absolute top-20 right-20 w-64 h-64 bg-blue-200 dark:bg-blue-800 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-20 animate-blob"></div>
       <div className="absolute bottom-20 left-20 w-64 h-64 bg-indigo-200 dark:bg-indigo-800 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+      <div className="absolute top-40 left-40 w-48 h-48 bg-purple-200 dark:bg-purple-800 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
 
-      <div className="max-w-6xl mx-auto relative">
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
           className="text-center mb-16"
         >
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5, type: "spring" }}
-            className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-lg mb-6"
+            variants={scaleIn}
+            className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-lg mb-6 relative overflow-hidden"
           >
-            <ForumIcon className="text-4xl text-white" />
+            <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+            <ForumIcon className="text-4xl text-white relative z-10" />
           </motion.div>
           
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">Connect</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4">
+            Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400">Connect</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? I'm just one message away.
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Have a project in mind or want to collaborate? I'm just one message away from turning ideas into reality.
           </p>
         </motion.div>
 
@@ -671,75 +243,129 @@ export const Message = () => {
         <AnimatePresence>
           {showSuccessModal && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+              variants={overlayVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md"
+              onClick={() => setShowSuccessModal(false)}
             >
               <motion.div
-                initial={{ scale: 0.9, y: 20 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 20 }}
-                className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-md w-full p-8 relative border border-green-100 dark:border-green-900"
+                variants={modalVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-8 relative border-2 border-green-500/30 dark:border-green-500/20"
+                onClick={(e) => e.stopPropagation()}
               >
+                {/* Success Particles */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                  {[...Array(12)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-2 h-2 bg-green-400 rounded-full"
+                      style={{ left: '50%', top: '50%' }}
+                      animate={{
+                        x: [0, Math.random() * 200 - 100],
+                        y: [0, Math.random() * 200 - 100],
+                        opacity: [0, 1, 0],
+                        scale: [0, 1, 0],
+                      }}
+                      transition={{
+                        duration: 2,
+                        delay: i * 0.1,
+                        repeat: Infinity,
+                        repeatDelay: 3,
+                      }}
+                    />
+                  ))}
+                </div>
+
                 <button
                   onClick={() => setShowSuccessModal(false)}
-                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
+                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors bg-gray-100 dark:bg-gray-700 rounded-full p-1"
                 >
                   <CloseIcon />
                 </button>
                 
-                <div className="text-center">
+                <div className="text-center relative">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    transition={{ delay: 0.2, type: "spring" }}
-                    className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full mb-6"
+                    transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                    className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500 rounded-full mb-6 shadow-xl"
                   >
-                    <CheckCircleIcon className="text-5xl text-white" />
+                    <CheckCircleIcon className="text-6xl text-white" />
                   </motion.div>
                   
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                    Message Sent Successfully!
-                  </h3>
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                      Message Sent Successfully!
+                    </h3>
+                  </motion.div>
                   
-                  <div className="flex items-center justify-center space-x-2 text-green-600 dark:text-green-400 mb-4">
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="flex items-center justify-center space-x-2 text-green-600 dark:text-green-400 mb-4"
+                  >
                     <VerifiedIcon className="text-lg" />
                     <span className="text-sm font-medium">Verified & Delivered</span>
-                  </div>
+                  </motion.div>
                   
-                  <p className="text-gray-600 dark:text-gray-300 mb-6">
-                    Thank you for reaching out, <span className="font-semibold text-gray-900 dark:text-white">{formData.name}</span>! I'll review your message and get back to you within 24 hours.
-                  </p>
+                  <motion.p
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="text-gray-600 dark:text-gray-300 mb-6"
+                  >
+                    Thank you for reaching out, <span className="font-semibold text-gray-900 dark:text-white">{formData.name}</span>! I'll review your message and get back to you within <span className="text-blue-600 dark:text-blue-400 font-semibold">24 hours</span>.
+                  </motion.p>
                   
-                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 mb-6">
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.6 }}
+                    className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-4 mb-6 border border-blue-100 dark:border-blue-800"
+                  >
                     <div className="flex items-start space-x-3">
                       <MarkunreadIcon className="text-blue-600 dark:text-blue-400 text-lg mt-0.5" />
                       <div className="text-left">
                         <p className="text-sm text-gray-600 dark:text-gray-300">A confirmation has been sent to:</p>
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">{formData.email}</p>
+                        <p className="text-sm font-medium text-gray-900 dark:text-white break-all">{formData.email}</p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                   
-                  <div className="flex space-x-3">
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.7 }}
+                    className="flex space-x-3"
+                  >
                     <motion.button
                       onClick={resetForm}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all"
+                      className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all flex items-center justify-center space-x-2"
                     >
-                      Send Another Message
+                      <SendIcon className="text-lg" />
+                      <span>Send Another Message</span>
                     </motion.button>
                     <motion.button
                       onClick={() => setShowSuccessModal(false)}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex-none px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+                      className="flex-none px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
                       <CloseIcon />
                     </motion.button>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             </motion.div>
@@ -748,62 +374,116 @@ export const Message = () => {
           {/* Error Modal */}
           {showErrorModal && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+              variants={overlayVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md"
+              onClick={() => setShowErrorModal(false)}
             >
               <motion.div
-                initial={{ scale: 0.9, y: 20 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 20 }}
-                className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-md w-full p-8 relative border border-red-100 dark:border-red-900"
+                variants={modalVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-8 relative border-2 border-red-500/30 dark:border-red-500/20"
+                onClick={(e) => e.stopPropagation()}
               >
+                {/* Error Particles */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                  {[...Array(8)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-2 h-2 bg-red-400 rounded-full"
+                      style={{ left: '50%', top: '50%' }}
+                      animate={{
+                        x: [0, Math.random() * 100 - 50],
+                        y: [0, Math.random() * 100 - 50],
+                        opacity: [0, 1, 0],
+                        scale: [0, 1.5, 0],
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        delay: i * 0.1,
+                        repeat: Infinity,
+                        repeatDelay: 2,
+                      }}
+                    />
+                  ))}
+                </div>
+
                 <button
                   onClick={() => setShowErrorModal(false)}
-                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
+                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors bg-gray-100 dark:bg-gray-700 rounded-full p-1"
                 >
                   <CloseIcon />
                 </button>
                 
-                <div className="text-center">
+                <div className="text-center relative">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2, type: "spring" }}
-                    className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-red-500 to-pink-500 rounded-full mb-6"
+                    className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-red-500 via-rose-500 to-pink-500 rounded-full mb-6 shadow-xl"
                   >
-                    <ErrorIcon className="text-5xl text-white" />
+                    <ErrorIcon className="text-6xl text-white" />
                   </motion.div>
                   
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                    Message Failed
-                  </h3>
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                      Message Failed
+                    </h3>
+                  </motion.div>
                   
-                  <div className="flex items-center justify-center space-x-2 text-red-600 dark:text-red-400 mb-4">
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="flex items-center justify-center space-x-2 text-red-600 dark:text-red-400 mb-4"
+                  >
                     <WarningIcon className="text-lg" />
                     <span className="text-sm font-medium">Delivery Error</span>
-                  </div>
+                  </motion.div>
                   
-                  <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  <motion.p
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="text-gray-600 dark:text-gray-300 mb-6"
+                  >
                     {submissionError || "Something went wrong. Please try again."}
-                  </p>
+                  </motion.p>
                   
-                  <div className="bg-red-50 dark:bg-red-900/20 rounded-xl p-4 mb-6">
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.6 }}
+                    className="bg-gradient-to-r from-red-50 to-rose-50 dark:from-red-900/20 dark:to-rose-900/20 rounded-xl p-4 mb-6 border border-red-100 dark:border-red-800"
+                  >
                     <div className="flex items-start space-x-3">
                       <InfoIcon className="text-red-600 dark:text-red-400 text-lg mt-0.5" />
                       <div className="text-left">
-                        <p className="text-sm text-gray-600 dark:text-gray-300">Possible solutions:</p>
-                        <ul className="text-sm text-gray-900 dark:text-white font-medium list-disc list-inside mt-1">
+                        <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">📋 Troubleshooting Tips:</p>
+                        <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1 list-disc list-inside">
                           <li>Check your internet connection</li>
-                          <li>Verify email is correct</li>
+                          <li>Verify email address is correct</li>
                           <li>Try again in a few minutes</li>
+                          <li>Contact me directly at <span className="font-medium text-blue-600 dark:text-blue-400">leonakingeneye2002@gmail.com</span></li>
                         </ul>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                   
-                  <div className="flex space-x-3">
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.7 }}
+                    className="flex space-x-3"
+                  >
                     <motion.button
                       onClick={() => {
                         setShowErrorModal(false);
@@ -811,19 +491,20 @@ export const Message = () => {
                       }}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all"
+                      className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all flex items-center justify-center space-x-2"
                     >
-                      Try Again
+                      <ReplayIcon className="text-lg" />
+                      <span>Try Again</span>
                     </motion.button>
                     <motion.button
                       onClick={() => setShowErrorModal(false)}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex-1 border border-gray-300 dark:border-gray-600 py-3 px-4 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+                      className="flex-1 border-2 border-gray-300 dark:border-gray-600 py-3 px-4 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
                       Close
                     </motion.button>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             </motion.div>
@@ -832,77 +513,123 @@ export const Message = () => {
           {/* Confirm Modal */}
           {showConfirmModal && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+              variants={overlayVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md"
+              onClick={() => setShowConfirmModal(false)}
             >
               <motion.div
-                initial={{ scale: 0.9, y: 20 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 20 }}
-                className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-md w-full p-8 relative border border-blue-100 dark:border-blue-900"
+                variants={modalVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-8 relative border-2 border-blue-500/30 dark:border-blue-500/20"
+                onClick={(e) => e.stopPropagation()}
               >
-                <div className="text-center">
+                <div className="text-center relative">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2, type: "spring" }}
-                    className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full mb-6"
+                    className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-500 rounded-full mb-6 shadow-xl"
                   >
-                    <SendIcon className="text-4xl text-white" />
+                    <SendIcon className="text-5xl text-white" />
                   </motion.div>
                   
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                    Confirm Message
-                  </h3>
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                      Confirm Your Message
+                    </h3>
+                  </motion.div>
                   
-                  <p className="text-gray-600 dark:text-gray-300 mb-6">
-                    Please review your message before sending.
-                  </p>
+                  <motion.p
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="text-gray-600 dark:text-gray-300 mb-6"
+                  >
+                    Please review your message before sending
+                  </motion.p>
                   
-                  <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4 mb-6 text-left space-y-3">
-                    <div className="flex items-start space-x-2">
-                      <PersonIcon className="text-gray-500 dark:text-gray-400 text-lg mt-0.5" />
-                      <div>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Name</p>
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">{formData.name}</p>
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-700/50 dark:to-gray-800 rounded-xl p-5 mb-6 text-left space-y-4"
+                  >
+                    <div className="flex items-start space-x-3">
+                      <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <PersonIcon className="text-blue-600 dark:text-blue-400 text-lg" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Full Name</p>
+                        <p className="text-sm font-semibold text-gray-900 dark:text-white">{formData.name || "Not provided"}</p>
                       </div>
                     </div>
-                    <div className="flex items-start space-x-2">
-                      <EmailIcon className="text-gray-500 dark:text-gray-400 text-lg mt-0.5" />
-                      <div>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Email</p>
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">{formData.email}</p>
+                    
+                    <div className="flex items-start space-x-3">
+                      <div className="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <EmailIcon className="text-indigo-600 dark:text-indigo-400 text-lg" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Email Address</p>
+                        <p className="text-sm font-semibold text-gray-900 dark:text-white break-all">{formData.email || "Not provided"}</p>
                       </div>
                     </div>
-                    <div className="flex items-start space-x-2">
-                      <MessageIcon className="text-gray-500 dark:text-gray-400 text-lg mt-0.5" />
-                      <div>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Message</p>
-                        <p className="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">{formData.message}</p>
+                    
+                    <div className="flex items-start space-x-3">
+                      <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <MessageIcon className="text-purple-600 dark:text-purple-400 text-lg" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Message</p>
+                        <p className="text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
+                          "{formData.message || "No message provided"}"
+                        </p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                   
-                  <div className="flex space-x-3">
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.6 }}
+                    className="flex space-x-3"
+                  >
                     <motion.button
                       onClick={handleSubmit}
+                      disabled={isSubmitting}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all"
+                      className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-4 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                     >
-                      Confirm & Send
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          <span>Sending...</span>
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircleIcon className="text-lg" />
+                          <span>Confirm & Send</span>
+                        </>
+                      )}
                     </motion.button>
                     <motion.button
                       onClick={() => setShowConfirmModal(false)}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex-1 border border-gray-300 dark:border-gray-600 py-3 px-4 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+                      className="flex-1 border-2 border-gray-300 dark:border-gray-600 py-3 px-4 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
-                      Edit
+                      Edit Message
                     </motion.button>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             </motion.div>
@@ -911,108 +638,244 @@ export const Message = () => {
 
         {/* Main Content */}
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left Side - Contact Info & Illustration */}
+          {/* Left Side - Contact Info & Professional Details */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
+            variants={fadeInLeft}
+            initial="hidden"
+            animate="visible"
+            className="space-y-6"
           >
-            <div className="bg-white dark:bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-slate-700">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                <RocketLaunchIcon className="mr-2 text-blue-600 dark:text-blue-400" />
-                Why Connect With Leon?
-              </h3>
+            {/* Professional Contact Card */}
+            <div className="bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-100 dark:border-gray-700 relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                    <CheckCircleIcon className="text-blue-600 dark:text-blue-400 text-lg" />
+              <div className="relative">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3 shadow-lg">
+                    <RocketLaunchIcon className="text-white text-xl" />
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-700 dark:text-gray-300"><span className="font-semibold">24h Response Time</span> - I prioritize quick replies</p>
+                  Why Connect With Me?
+                </h3>
+                
+                <div className="space-y-5">
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 rounded-lg flex items-center justify-center">
+                      <AccessTimeIcon className="text-blue-600 dark:text-blue-400 text-xl" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">24/7 Availability</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">I respond within 24 hours, often much faster</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 w-8 h-8 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center">
-                    <CheckCircleIcon className="text-indigo-600 dark:text-indigo-400 text-lg" />
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 rounded-lg flex items-center justify-center">
+                      <VerifiedIcon className="text-green-600 dark:text-green-400 text-xl" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">NDA Ready</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Your ideas and projects are 100% confidential</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-700 dark:text-gray-300"><span className="font-semibold">NDA Ready</span> - Your ideas are safe with me</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
-                    <CheckCircleIcon className="text-purple-600 dark:text-purple-400 text-lg" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-700 dark:text-gray-300"><span className="font-semibold">Free Consultation</span> - Let's discuss your project</p>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-lg flex items-center justify-center">
+                      <CheckCircleIcon className="text-purple-600 dark:text-purple-400 text-xl" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Free Consultation</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">30-minute strategy call at no cost</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
+            {/* Contact Information Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <motion.div
+                whileHover={{ y: -5 }}
+                className="bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-lg p-5 border border-gray-100 dark:border-gray-700"
+              >
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                    <EmailIcon className="text-white text-lg" />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">Email</h4>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 break-all">leonakingeneye2002@gmail.com</p>
+                <button
+                  onClick={() => copyToClipboard("leonakingeneye2002@gmail.com", "email")}
+                  className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium flex items-center space-x-1 transition-colors"
+                >
+                  <ContentCopyIcon className="text-sm" />
+                  <span>{copiedEmail ? "Copied!" : "Copy email"}</span>
+                </button>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ y: -5 }}
+                className="bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-lg p-5 border border-gray-100 dark:border-gray-700"
+              >
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                    <PhoneIcon className="text-white text-lg" />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">Phone</h4>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">+250 787 944 577</p>
+                <button
+                  onClick={() => copyToClipboard("+250787944577", "phone")}
+                  className="text-xs text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 font-medium flex items-center space-x-1 transition-colors"
+                >
+                  <ContentCopyIcon className="text-sm" />
+                  <span>{copiedPhone ? "Copied!" : "Copy number"}</span>
+                </button>
+              </motion.div>
+            </div>
+
+            {/* Location Card */}
+            <motion.div
+              whileHover={{ y: -5 }}
+              className="bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-lg p-5 border border-gray-100 dark:border-gray-700"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                  <LocationOnIcon className="text-white text-lg" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">Location</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Kigali, Rwanda</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Social Links */}
+            <div className="flex justify-start space-x-4">
+              <motion.a
+                href="https://github.com/Leon-kings"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -5, scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-12 h-12 bg-gray-800 dark:bg-gray-700 rounded-lg flex items-center justify-center text-white hover:bg-gray-900 dark:hover:bg-gray-600 transition-all shadow-lg"
+              >
+                <GitHubIcon />
+              </motion.a>
+              <motion.a
+                href="https://linkedin.com/in/leon-akingeneye"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -5, scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white hover:bg-blue-700 transition-all shadow-lg"
+              >
+                <LinkedInIcon />
+              </motion.a>
+              <motion.a
+                href="https://twitter.com/leon_kings"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -5, scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-12 h-12 bg-sky-500 rounded-lg flex items-center justify-center text-white hover:bg-sky-600 transition-all shadow-lg"
+              >
+                <TwitterIcon />
+              </motion.a>
+            </div>
+
             {/* Animated Illustration */}
             <motion.div
               animate={{ 
-                y: [0, -10, 0],
+                y: [0, -15, 0],
               }}
               transition={{ 
-                duration: 4,
+                duration: 5,
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="hidden lg:block"
+              className="hidden lg:block mt-8"
             >
-              <svg viewBox="0 0 500 400" className="w-full h-auto">
-                <defs>
-                  <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#3B82F6', stopOpacity: 0.1 }} />
-                    <stop offset="100%" style={{ stopColor: '#6366F1', stopOpacity: 0.1 }} />
-                  </linearGradient>
-                </defs>
-                
-                {/* Background Circle */}
-                <circle cx="250" cy="200" r="150" fill="url(#grad1)" />
-                
-                {/* Envelope Icon */}
-                <motion.g
-                  animate={{ rotate: [-5, 5, -5] }}
-                  transition={{ duration: 6, repeat: Infinity }}
-                >
-                  <rect x="170" y="130" width="160" height="120" rx="16" fill="#3B82F6" />
-                  <rect x="170" y="130" width="160" height="120" rx="16" fill="white" className="dark:fill-slate-800" />
-                  <polygon points="170,130 250,190 330,130" fill="#3B82F6" fillOpacity="0.2" />
-                  <polygon points="170,250 210,200 250,230 290,200 330,250" fill="#3B82F6" fillOpacity="0.3" />
-                </motion.g>
-                
-                {/* Paper Airplane */}
-                <motion.g
-                  animate={{ x: [0, 20, 0], y: [0, -10, 0] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                >
-                  <polygon points="300,160 320,140 340,160 320,200" fill="#6366F1" />
-                </motion.g>
-              </svg>
+              <div className="relative">
+                <svg viewBox="0 0 500 300" className="w-full h-auto">
+                  <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style={{ stopColor: '#3B82F6', stopOpacity: 0.2 }} />
+                      <stop offset="100%" style={{ stopColor: '#6366F1', stopOpacity: 0.2 }} />
+                    </linearGradient>
+                    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style={{ stopColor: '#8B5CF6', stopOpacity: 0.2 }} />
+                      <stop offset="100%" style={{ stopColor: '#EC4899', stopOpacity: 0.2 }} />
+                    </linearGradient>
+                  </defs>
+                  
+                  {/* Background Circles */}
+                  <circle cx="250" cy="150" r="120" fill="url(#grad1)" />
+                  <circle cx="280" cy="130" r="80" fill="url(#grad2)" />
+                  
+                  {/* Envelope Base */}
+                  <rect x="180" y="90" width="140" height="100" rx="12" fill="#3B82F6" />
+                  <rect x="180" y="90" width="140" height="100" rx="12" fill="white" className="dark:fill-gray-800" />
+                  
+                  {/* Envelope Flap */}
+                  <polygon points="180,90 250,140 320,90" fill="#3B82F6" fillOpacity="0.3" />
+                  <polygon points="180,90 250,140 320,90" fill="white" className="dark:fill-gray-800" stroke="#3B82F6" strokeWidth="1" strokeDasharray="4" />
+                  
+                  {/* Envelope Bottom */}
+                  <polygon points="180,190 210,150 250,170 290,150 320,190" fill="#3B82F6" fillOpacity="0.4" />
+                  
+                  {/* Paper Airplane */}
+                  <motion.g
+                    animate={{ 
+                      x: [0, 40, 0],
+                      y: [0, -20, 0],
+                      rotate: [0, 10, 0]
+                    }}
+                    transition={{ 
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <polygon points="320,120 360,100 380,120 360,140" fill="#6366F1" />
+                    <polygon points="360,140 380,120 370,130" fill="#4F46E5" />
+                  </motion.g>
+                  
+                  {/* Dots */}
+                  <circle cx="210" cy="130" r="3" fill="#3B82F6" />
+                  <circle cx="230" cy="150" r="3" fill="#6366F1" />
+                  <circle cx="270" cy="120" r="3" fill="#8B5CF6" />
+                  <circle cx="290" cy="140" r="3" fill="#EC4899" />
+                </svg>
+              </div>
             </motion.div>
           </motion.div>
 
           {/* Right Side - Form */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            variants={fadeInRight}
+            initial="hidden"
+            animate="visible"
           >
-            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-8 border border-gray-100 dark:border-slate-700">
+            <div className="bg-white dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-gray-100 dark:border-gray-700 relative overflow-hidden">
+              {/* Form Header */}
+              <div className="mb-8">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 flex items-center">
+                  <span className="w-1.5 h-8 bg-gradient-to-b from-blue-500 to-indigo-600 rounded-full mr-3"></span>
+                  Send a Message
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">Fill out the form below and I'll get back to you shortly</p>
+              </div>
+
               <form onSubmit={handleConfirmSubmit} className="space-y-6">
                 {/* Name Field */}
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Full Name
+                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    Full Name <span className="text-red-500">*</span>
                   </label>
-                  <div className="relative">
+                  <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <PersonIcon className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                      <PersonIcon className="h-5 w-5 text-gray-400 dark:text-gray-500 group-focus-within:text-blue-500 transition-colors" />
                     </div>
                     <input
                       type="text"
@@ -1020,7 +883,7 @@ export const Message = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
+                      className="block w-full pl-10 pr-3 py-3.5 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
                       placeholder="John Smith"
                     />
                   </div>
@@ -1028,12 +891,12 @@ export const Message = () => {
 
                 {/* Email Field */}
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Email Address
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    Email Address <span className="text-red-500">*</span>
                   </label>
-                  <div className="relative">
+                  <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <EmailIcon className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                      <EmailIcon className="h-5 w-5 text-gray-400 dark:text-gray-500 group-focus-within:text-blue-500 transition-colors" />
                     </div>
                     <input
                       type="email"
@@ -1041,7 +904,7 @@ export const Message = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
+                      className="block w-full pl-10 pr-3 py-3.5 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
                       placeholder="hello@example.com"
                     />
                   </div>
@@ -1049,12 +912,12 @@ export const Message = () => {
 
                 {/* Message Field */}
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Your Message
+                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    Your Message <span className="text-red-500">*</span>
                   </label>
-                  <div className="relative">
-                    <div className="absolute top-3 left-0 pl-3 pointer-events-none">
-                      <MessageIcon className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                  <div className="relative group">
+                    <div className="absolute top-3.5 left-0 pl-3 pointer-events-none">
+                      <MessageIcon className="h-5 w-5 text-gray-400 dark:text-gray-500 group-focus-within:text-blue-500 transition-colors" />
                     </div>
                     <textarea
                       id="message"
@@ -1062,9 +925,17 @@ export const Message = () => {
                       value={formData.message}
                       onChange={handleChange}
                       rows="5"
-                      className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
+                      className="block w-full pl-10 pr-3 py-3.5 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all resize-none"
                       placeholder="Tell me about your project, idea, or collaboration..."
                     />
+                  </div>
+                  <div className="flex justify-between mt-2">
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Minimum 10 characters
+                    </p>
+                    <p className="text-xs font-medium text-gray-600 dark:text-gray-400">
+                      {formData.message.length}/500
+                    </p>
                   </div>
                 </div>
 
@@ -1074,24 +945,39 @@ export const Message = () => {
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-4 px-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                  className="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white py-4 px-6 rounded-xl font-bold shadow-xl hover:shadow-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 group"
                 >
                   {isSubmitting ? (
                     <>
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      <span>Sending...</span>
+                      <span>Sending Message...</span>
                     </>
                   ) : (
                     <>
-                      <SendIcon className="text-lg" />
+                      <SendIcon className="text-xl group-hover:rotate-12 transition-transform" />
                       <span>Send Message</span>
+                      <RocketLaunchIcon className="text-xl group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
                 </motion.button>
 
-                <p className="text-xs text-center text-gray-500 dark:text-gray-400 mt-4">
-                  Your information is secure and will never be shared
-                </p>
+                {/* Trust Badge */}
+                <div className="flex items-center justify-center space-x-2 pt-4">
+                  <div className="flex -space-x-2">
+                    <div className="w-6 h-6 bg-blue-500 rounded-full border-2 border-white dark:border-gray-800 flex items-center justify-center">
+                      <span className="text-white text-xs">✓</span>
+                    </div>
+                    <div className="w-6 h-6 bg-indigo-500 rounded-full border-2 border-white dark:border-gray-800 flex items-center justify-center">
+                      <span className="text-white text-xs">🔒</span>
+                    </div>
+                    <div className="w-6 h-6 bg-purple-500 rounded-full border-2 border-white dark:border-gray-800 flex items-center justify-center">
+                      <span className="text-white text-xs">⚡</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    Encrypted & Secure • No spam ever
+                  </p>
+                </div>
               </form>
             </div>
           </motion.div>
@@ -1123,6 +1009,9 @@ export const Message = () => {
         }
         .animation-delay-2000 {
           animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
         }
       `}</style>
     </section>
